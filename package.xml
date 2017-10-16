@@ -22,7 +22,7 @@
   <email>slusarz@horde.org</email>
   <active>yes</active>
  </developer>
- <date>2016-09-06</date>
+ <date>2017-10-17</date>
  <version>
   <release>2.3.6</release>
   <api>2.3.0</api>
@@ -37,15 +37,6 @@
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
-   <dir name="doc">
-    <dir name="Horde">
-     <dir name="Text">
-      <dir name="Filter">
-       <file name="COPYING" role="doc" />
-      </dir> <!-- /doc/Horde/Text/Filter -->
-     </dir> <!-- /doc/Horde/Text -->
-    </dir> <!-- /doc/Horde -->
-   </dir> <!-- /doc -->
    <dir name="lib">
     <dir name="Horde">
      <dir name="Text">
@@ -357,6 +348,7 @@
      </dir> <!-- /test/Horde/Text -->
     </dir> <!-- /test/Horde -->
    </dir> <!-- /test -->
+   <file name="LICENSE" role="doc" />
   </dir> <!-- / -->
  </contents>
  <dependencies>
@@ -427,7 +419,6 @@
  </dependencies>
  <phprelease>
   <filelist>
-   <install as="COPYING" name="doc/Horde/Text/Filter/COPYING" />
    <install as="Horde/Text/Filter.php" name="lib/Horde/Text/Filter.php" />
    <install as="Horde/Text/Filter/Base.php" name="lib/Horde/Text/Filter/Base.php" />
    <install as="Horde/Text/Filter/Bbcode.php" name="lib/Horde/Text/Filter/Bbcode.php" />
@@ -450,7 +441,7 @@
    <install as="Horde/Text/Filter/Translation.php" name="lib/Horde/Text/Filter/Translation.php" />
    <install as="Horde/Text/Filter/Words.php" name="lib/Horde/Text/Filter/Words.php" />
    <install as="Horde/Text/Filter/Xss.php" name="lib/Horde/Text/Filter/Xss.php" />
-   <install as="locale/Horde_Text_Filter.pot" name="locale/Horde_Text_Filter.pot" />
+   <install as="LICENSE" name="LICENSE" />
    <install as="locale/ar/LC_MESSAGES/Horde_Text_Filter.mo" name="locale/ar/LC_MESSAGES/Horde_Text_Filter.mo" />
    <install as="locale/ar/LC_MESSAGES/Horde_Text_Filter.po" name="locale/ar/LC_MESSAGES/Horde_Text_Filter.po" />
    <install as="locale/bg/LC_MESSAGES/Horde_Text_Filter.mo" name="locale/bg/LC_MESSAGES/Horde_Text_Filter.mo" />
@@ -483,6 +474,7 @@
    <install as="locale/gl/LC_MESSAGES/Horde_Text_Filter.po" name="locale/gl/LC_MESSAGES/Horde_Text_Filter.po" />
    <install as="locale/he/LC_MESSAGES/Horde_Text_Filter.mo" name="locale/he/LC_MESSAGES/Horde_Text_Filter.mo" />
    <install as="locale/he/LC_MESSAGES/Horde_Text_Filter.po" name="locale/he/LC_MESSAGES/Horde_Text_Filter.po" />
+   <install as="locale/Horde_Text_Filter.pot" name="locale/Horde_Text_Filter.pot" />
    <install as="locale/hr/LC_MESSAGES/Horde_Text_Filter.mo" name="locale/hr/LC_MESSAGES/Horde_Text_Filter.mo" />
    <install as="locale/hr/LC_MESSAGES/Horde_Text_Filter.po" name="locale/hr/LC_MESSAGES/Horde_Text_Filter.po" />
    <install as="locale/hu/LC_MESSAGES/Horde_Text_Filter.mo" name="locale/hu/LC_MESSAGES/Horde_Text_Filter.mo" />
@@ -539,6 +531,7 @@
    <install as="Horde/Text/Filter/bootstrap.php" name="test/Horde/Text/Filter/bootstrap.php" />
    <install as="Horde/Text/Filter/EmailsTest.php" name="test/Horde/Text/Filter/EmailsTest.php" />
    <install as="Horde/Text/Filter/EnvironmentTest.php" name="test/Horde/Text/Filter/EnvironmentTest.php" />
+   <install as="Horde/Text/Filter/fixtures/bug_11116.txt" name="test/Horde/Text/Filter/fixtures/bug_11116.txt" />
    <install as="Horde/Text/Filter/Html2textTest.php" name="test/Horde/Text/Filter/Html2textTest.php" />
    <install as="Horde/Text/Filter/LinkurlsTest.php" name="test/Horde/Text/Filter/LinkurlsTest.php" />
    <install as="Horde/Text/Filter/MsofficeTest.php" name="test/Horde/Text/Filter/MsofficeTest.php" />
@@ -548,7 +541,6 @@
    <install as="Horde/Text/Filter/Text2htmlTest.php" name="test/Horde/Text/Filter/Text2htmlTest.php" />
    <install as="Horde/Text/Filter/WordsTest.php" name="test/Horde/Text/Filter/WordsTest.php" />
    <install as="Horde/Text/Filter/XssTest.php" name="test/Horde/Text/Filter/XssTest.php" />
-   <install as="Horde/Text/Filter/fixtures/bug_11116.txt" name="test/Horde/Text/Filter/fixtures/bug_11116.txt" />
   </filelist>
  </phprelease>
  <changelog>
@@ -1121,7 +1113,7 @@ Initial release as a PEAR package
    <stability>
     <release>stable</release>
     <api>stable</api></stability>
-   <date>2016-09-06</date>
+   <date>2017-10-17</date>
    <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
    <notes>
 * 
