@@ -52,7 +52,7 @@
  * Email validation based on Chuck Hagenbuch's
  * Mail_RFC822::isValidInetAddress().
  *
- * See the enclosed file COPYING for license information (LGPL). If you
+ * See the enclosed file LICENSE for license information (LGPL). If you
  * did not receive this file, see http://www.horde.org/licenses/lgpl21.
  *
  * @author   Carlos Pedrinaci <cpedrinaci@yahoo.es>
