@@ -22,7 +22,7 @@
   <email>slusarz@horde.org</email>
   <active>yes</active>
  </developer>
- <date>2017-10-17</date>
+ <date>2017-10-20</date>
  <version>
   <release>2.3.6</release>
   <api>2.3.0</api>
@@ -338,7 +338,6 @@
        <file name="Html2textTest.php" role="test" />
        <file name="LinkurlsTest.php" role="test" />
        <file name="MsofficeTest.php" role="test" />
-       <file name="phpunit.xml" role="test" />
        <file name="SimplemarkupTest.php" role="test" />
        <file name="Space2htmlTest.php" role="test" />
        <file name="Text2htmlTest.php" role="test" />
@@ -535,7 +534,6 @@
    <install as="Horde/Text/Filter/Html2textTest.php" name="test/Horde/Text/Filter/Html2textTest.php" />
    <install as="Horde/Text/Filter/LinkurlsTest.php" name="test/Horde/Text/Filter/LinkurlsTest.php" />
    <install as="Horde/Text/Filter/MsofficeTest.php" name="test/Horde/Text/Filter/MsofficeTest.php" />
-   <install as="Horde/Text/Filter/phpunit.xml" name="test/Horde/Text/Filter/phpunit.xml" />
    <install as="Horde/Text/Filter/SimplemarkupTest.php" name="test/Horde/Text/Filter/SimplemarkupTest.php" />
    <install as="Horde/Text/Filter/Space2htmlTest.php" name="test/Horde/Text/Filter/Space2htmlTest.php" />
    <install as="Horde/Text/Filter/Text2htmlTest.php" name="test/Horde/Text/Filter/Text2htmlTest.php" />
@@ -1113,7 +1111,7 @@ Initial release as a PEAR package
    <stability>
     <release>stable</release>
     <api>stable</api></stability>
-   <date>2017-10-17</date>
+   <date>2017-10-20</date>
    <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
    <notes>
 * 
