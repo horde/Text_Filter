@@ -1,0 +1,321 @@
+----------
+v2.3.6-git
+----------
+
+
+------
+v2.3.5
+------
+
+[jan] SECURITY: Fix XSS via data:text/html content of form action and xlink
+      attributes (Reported by Liuzhu <fantasy7082@hotmail.com>).
+
+
+------
+v2.3.4
+------
+
+[jan] Update Greek translation (Limperis Antonis <limperis@cti.gr>).
+
+
+------
+v2.3.3
+------
+
+[jan] Mark PHP 7 as supported.
+
+
+------
+v2.3.2
+------
+
+[jan] Fix Composer file.
+
+
+------
+v2.3.1
+------
+
+[mjr] Prevent malformed urls from leaking exceptions (Bug #13965).
+[jan] Fix issues with certain locales like Turkish.
+
+
+------
+v2.3.0
+------
+
+[mjr] Fix failing tests on MacOS related to mulitbyte data contained in links.
+[mjr] Add nestingLimit parameter to Html2text filter.
+[jan] Add 'html' hint to Simplemarkup filter to indicate the input format.
+[jan] Match simple markup spanning a complete line too.
+
+
+------
+v2.2.2
+------
+
+[jan] Support loading translations from Composer-installed package.
+[jan] Improve PSR-2 compatibility.
+[mms] Support display of IDN domains in URLs.
+
+
+------
+v2.2.1
+------
+
+[mms] Javascript minification has been deprecated and moved to the
+      Horde_JavascriptMinify package.
+
+
+------
+v2.2.0
+------
+
+[mms] Move JSMin code to a separate package.
+
+
+------
+v2.1.5
+------
+
+[mms] Fix issue from upstream jsmin.c that was breaking parsing of a keyword
+      immediately followed by a regexp (Bug #12787).
+
+
+------
+v2.1.4
+------
+
+[mms] Merge upstream updates to JsMin filter.
+
+
+------
+v2.1.3
+------
+
+[mms] Yet more sanity checking in the Text2html filter to workaround incorrect
+      charset information.
+
+
+------
+v2.1.2
+------
+
+[mms] Handle non-supported htmlspecialchars() charsets in the Text2html filter
+      (Bug #12253).
+
+
+------
+v2.1.1
+------
+
+[mms] If a preg call exceeds the backtrack limit, fallback to the original text
+      (Bug #12152).
+
+
+------
+v2.1.0
+------
+
+[mms] Add 'words' option to the Words filter.
+
+
+------
+v2.0.5
+------
+
+[mms] Html2text filter now has improved handling of extra whitespace.
+[mms] Fix XSS filter removing control characters that cause certain charsets
+      (ISO-2022-JP) to break (Bug #12015).
+
+
+------
+v2.0.4
+------
+
+[jan] Update Basque translation (Ibon Igartua <ibon.igartua@ehu.es>).
+
+
+------
+v2.0.3
+------
+
+[jan] Improve HTML-to-Text filter.
+
+
+------
+v2.0.2
+------
+
+[mms] Jsmin fixes merged from upstream C source.
+
+
+------
+v2.0.1
+------
+
+[jan] Update Dutch translation (Arjen de Korte <build+horde@de-korte.org>).
+
+
+------
+v2.0.0
+------
+
+First stable release for Horde 5.
+
+
+-----------
+v2.0.0beta1
+-----------
+
+First beta release for Horde 5.
+[mms] Merge upstream changes to jsmin filter that caused broken compression of
+      jQuery Mobile file.
+
+
+------------
+v2.0.0alpha1
+------------
+
+First alpha release for Horde 5.
+
+
+------
+v1.1.5
+------
+
+[jan] Support definition lists in HTML-to-text filter (Nathan Barhorst).
+
+
+------
+v1.1.4
+------
+
+[mms] Fix preg backtrack issue in the Linkurls filter (Bug #11116).
+
+
+------
+v1.1.3
+------
+
+[mms] Merge upstream updates to JsMin filter.
+
+
+------
+v1.1.2
+------
+
+[mms] Fix unnecessary use of POSIX collating element in Linkurls filter
+      (jr@yaina.de, Bug #10828).
+
+
+------
+v1.1.1
+------
+
+[mms] Add some more questionable tags/attributes to strip in the XSS filter.
+
+
+------
+v1.1.0
+------
+
+[mms] Horde_Text_Filter_Text2Html now accepts a Horde_Text_Flowed object as
+      input to filter(); allows proper quoting of input text.
+
+
+------
+v1.0.4
+------
+
+[jan] Update Latvian translation.
+
+
+------
+v1.0.3
+------
+
+[mms] Correct fix for deletion of unwanted HTML nodes in XSS filter.
+
+
+------
+v1.0.2
+------
+
+[mms] Fix deletion of unwanted HTML nodes in XSS filter.
+[mms] Make sure tidy can parse incoming HTML string (Bug #9946).
+
+
+------
+v1.0.1
+------
+
+[mms] Remove dependency on Horde_Text_Filter_Csstidy.
+
+
+------
+v1.0.0
+------
+
+First stable release for Horde 4.
+
+
+---------
+v1.0.0RC2
+---------
+
+Second release candidate for Horde 4.
+
+
+---------
+v1.0.0RC1
+---------
+
+First release candidate for Horde 4.
+
+
+-----------
+v1.0.0beta1
+-----------
+
+Horde_Text_Filter#filter() now throws an exception on error (Bug #9640).
+
+
+------------
+v1.0.0alpha1
+------------
+
+First alpha release for Horde 4.
+Html2text filter will use horde/Text_Filter, if available, to wrap text.
+Add callback parameter to the Html2text filter.
+XSS filter now uses PHP DOM parser to process incoming text.
+Remove Horde/Core dependency.
+Add Horde_Text_Filter_Exception::.
+Html2text converter now uses XML parser to generate output.
+Add ability to define filters to use with preg_replace_callback().
+Add 'noprefetch' parameter to XSS filter (Ticket #8836).
+Add XSS filtering for data URLs in A HREF parameters (Bug #8715).
+Add support for Google Closure Compiler in javascript minfiy filter.
+Fix dimming signatures when mixed with quoted text (Bug #4299).
+Added javascript minify filter.
+Add support for using the tidy extension when filtering HTML data.
+
+
+------
+v0.0.2
+------
+
+Don't strip BASE tags when 'strip_styles' is false.
+Added ability to link <test@example.com> e-mail addresses in plain text.
+Removed dependency on external javascript file when toggling quoted lines.
+Converted to package.xml 2.0 for pear.horde.org
+Allow the bad words filter to leave the first character of a matching word and
+      replace the rest with '*' (duck@obala.net).
+Improved efficiency of the linkurls filter when searching long lines
+
+
+------
+v0.0.1
+------
+
+Initial release as a PEAR package

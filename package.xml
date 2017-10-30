@@ -22,7 +22,7 @@
   <email>slusarz@horde.org</email>
   <active>yes</active>
  </developer>
- <date>2016-09-06</date>
+ <date>2017-10-30</date>
  <version>
   <release>2.3.6</release>
   <api>2.3.0</api>
@@ -41,6 +41,7 @@
     <dir name="Horde">
      <dir name="Text">
       <dir name="Filter">
+       <file name="CHANGES" role="doc" />
        <file name="COPYING" role="doc" />
       </dir> <!-- /doc/Horde/Text/Filter -->
      </dir> <!-- /doc/Horde/Text -->
@@ -427,6 +428,7 @@
  </dependencies>
  <phprelease>
   <filelist>
+   <install as="CHANGES" name="doc/Horde/Text/Filter/CHANGES" />
    <install as="COPYING" name="doc/Horde/Text/Filter/COPYING" />
    <install as="Horde/Text/Filter.php" name="lib/Horde/Text/Filter.php" />
    <install as="Horde/Text/Filter/Base.php" name="lib/Horde/Text/Filter/Base.php" />
@@ -1121,7 +1123,7 @@
    <stability>
     <release>stable</release>
     <api>stable</api></stability>
-   <date>2016-09-06</date>
+   <date>2017-10-30</date>
    <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
    <notes>
 * 
