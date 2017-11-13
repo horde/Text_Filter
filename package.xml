@@ -2,7 +2,7 @@
 <package packagerversion="1.9.2" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
  <name>Horde_Text_Filter</name>
  <channel>pear.horde.org</channel>
- <summary>Horde Text Filter API</summary>
+ <summary>Text filtering and conversion library</summary>
  <description>Common methods for fitering and converting text.</description>
  <lead>
   <name>Chuck Hagenbuch</name>
@@ -20,9 +20,9 @@
   <name>Michael Slusarz</name>
   <user>slusarz</user>
   <email>slusarz@horde.org</email>
-  <active>yes</active>
+  <active>no</active>
  </developer>
- <date>2017-10-27</date>
+ <date>2017-11-11</date>
  <version>
   <release>2.3.6</release>
   <api>2.3.0</api>
@@ -1121,7 +1121,7 @@
    <stability>
     <release>stable</release>
     <api>stable</api></stability>
-   <date>2017-10-27</date>
+   <date>2017-11-11</date>
    <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
    <notes>
 * 
