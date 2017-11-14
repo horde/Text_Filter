@@ -348,7 +348,6 @@
        <file name="Html2textTest.php" role="test" />
        <file name="LinkurlsTest.php" role="test" />
        <file name="MsofficeTest.php" role="test" />
-       <file name="phpunit.xml" role="test" />
        <file name="SimplemarkupTest.php" role="test" />
        <file name="Space2htmlTest.php" role="test" />
        <file name="Text2htmlTest.php" role="test" />
@@ -544,7 +543,6 @@
    <install as="Horde/Text/Filter/Html2textTest.php" name="test/Horde/Text/Filter/Html2textTest.php" />
    <install as="Horde/Text/Filter/LinkurlsTest.php" name="test/Horde/Text/Filter/LinkurlsTest.php" />
    <install as="Horde/Text/Filter/MsofficeTest.php" name="test/Horde/Text/Filter/MsofficeTest.php" />
-   <install as="Horde/Text/Filter/phpunit.xml" name="test/Horde/Text/Filter/phpunit.xml" />
    <install as="Horde/Text/Filter/SimplemarkupTest.php" name="test/Horde/Text/Filter/SimplemarkupTest.php" />
    <install as="Horde/Text/Filter/Space2htmlTest.php" name="test/Horde/Text/Filter/Space2htmlTest.php" />
    <install as="Horde/Text/Filter/Text2htmlTest.php" name="test/Horde/Text/Filter/Text2htmlTest.php" />
