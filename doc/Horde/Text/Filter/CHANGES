@@ -1,6 +1,10 @@
-----------
-v2.3.6-git
-----------
+------
+v2.3.6
+------
+
+[jan] Fix regular expression error with PHP 7.3 (Remi Collet
+      <remi@remirepo.net>, PR 1).
+
 
 
 ------
