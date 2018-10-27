@@ -8,7 +8,9 @@
   license:
     identifier: LGPL-2.1
     uri: http://www.horde.org/licenses/lgpl21
-  notes:
+  notes: |+
+    [jan] Fix regular expression error with PHP 7.3 (Remi Collet <remi@remirepo.net>, PR 1).
+    
 2.3.5:
   api: 2.3.0
   state:
