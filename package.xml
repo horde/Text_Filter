@@ -33,7 +33,7 @@
  </stability>
  <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
  <notes>
-* 
+* [jan] Fix regular expression error with PHP 7.3 (Remi Collet &lt;remi@remirepo.net&gt;, PR 1).
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
@@ -1124,7 +1124,7 @@
    <date>2017-11-14</date>
    <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
    <notes>
-* 
+* [jan] Fix regular expression error with PHP 7.3 (Remi Collet &lt;remi@remirepo.net&gt;, PR 1).
    </notes>
   </release>
  </changelog>
