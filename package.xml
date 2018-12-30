@@ -22,7 +22,7 @@
   <email>slusarz@horde.org</email>
   <active>no</active>
  </developer>
- <date>2017-11-14</date>
+ <date>2018-12-30</date>
  <version>
   <release>2.3.6</release>
   <api>2.3.0</api>
@@ -1121,7 +1121,7 @@
    <stability>
     <release>stable</release>
     <api>stable</api></stability>
-   <date>2017-11-14</date>
+   <date>2018-12-30</date>
    <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
    <notes>
 * [jan] Fix regular expression error with PHP 7.3 (Remi Collet &lt;remi@remirepo.net&gt;, PR 1).
