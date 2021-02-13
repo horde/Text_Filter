@@ -37,7 +37,8 @@ class Horde_Text_Filter_Text2html extends Horde_Text_Filter_Base
         'linkurls' => false,
         'text2html' => false,
         'parselevel' => 0,
-        'space2html' => false
+        'space2html' => false,
+        'secretKey' => null
     );
 
     /**
@@ -144,7 +145,8 @@ class Horde_Text_Filter_Text2html extends Horde_Text_Filter_Base
                 $filters = $this->_params['linkurls'];
             } else {
                 $filters['linkurls'] = array(
-                    'encode' => true
+                    'encode' => true,
+                    'secretKey' => $this->_params['secretKey']
                 );
             }
 
@@ -155,7 +157,8 @@ class Horde_Text_Filter_Text2html extends Horde_Text_Filter_Base
                     $filters += $this->_params['emails'];
                 } else {
                     $filters['emails'] = array(
-                        'encode' => true
+                        'encode' => true,
+                        'secretKey' => $this->_params['secretKey']
                     );
                 }
             }
@@ -201,9 +204,9 @@ class Horde_Text_Filter_Text2html extends Horde_Text_Filter_Base
 
         /* Do in-lining of http://xxx.xxx to link, xxx@xxx.xxx to email. */
         if ($this->_params['parselevel'] < self::NOHTML) {
-            $text = Horde_Text_Filter_Linkurls::decode($text);
+            $text = Horde_Text_Filter_Linkurls::decode($text, $this->_params['secretKey']);
             if ($this->_params['parselevel'] < self::MICRO_LINKURL) {
-                $text = Horde_Text_Filter_Emails::decode($text);
+                $text = Horde_Text_Filter_Emails::decode($text, $this->_params['secretKey']);
             }
 
             if ($this->_params['space2html']) {

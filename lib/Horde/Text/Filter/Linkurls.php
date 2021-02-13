@@ -29,6 +29,10 @@
  *               DEFAULT: false
  *   - target: (string) The link target.
  *             DEFAULT: '_blank'
+ *   - secretKey: (string) A key to use for Horde_Secret encryption of encoded
+ *                html tags (see the 'encode' paramter).
+ *             DEFAULT: A default key will be created by an instance of
+ *             Horde_Secret.
  *
  * Copyright 2003-2017 Horde LLC (http://www.horde.org/)
  *
@@ -60,6 +64,7 @@ class Horde_Text_Filter_Linkurls extends Horde_Text_Filter_Base
         'encode' => false,
         'nofollow' => false,
         'target' => '_blank',
+        'secretKey' => null
     );
 
     /**
@@ -172,8 +177,13 @@ END_OF_REGEX;
                 '<meta http-equiv="x-dns-prefetch-control" value="on" />';
         }
 
+        $secret = new Horde_Secret();
+        if (empty($this->_params['secretKey'])) {
+            $this->_params['secretKey'] = $secret->setKey();
+        }
+
         if ($this->_params['encode']) {
-            $replacement = chr(0) . chr(0) . chr(0) . base64_encode($replacement) . chr(0) . chr(0) . chr(0);
+            $replacement = chr(0) . chr(0) . chr(0) . base64_encode($secret->write($this->_params['secretKey'], $replacement)) . chr(0) . chr(0) . chr(0);
         }
 
         return $replacement;
@@ -183,15 +193,23 @@ END_OF_REGEX;
      * "Decodes" the text formerly encoded by using the "encode" parameter.
      *
      * @param string $text  An encoded text.
+     * @param string $key   An optional key to use with Horde_Secret encryption.
+     *                      If omitted a key will be fetched from a Horde_Secret
+     *                      instance.
      *
      * @return string  The decoded text.
      */
-    public static function decode($text)
+    public static function decode($text, $key = null)
     {
+        $secret = new Horde_Secret();
+        if (empty($key)) {
+            $key = $secret->getKey();
+        }
+
         return preg_replace_callback(
             '/\00\00\00([\w=+\/]*)\00\00\00/',
-            function($hex) {
-                return base64_decode($hex[1]);
+            function($hex) use ($secret, $key) {
+                return $secret->read($key, base64_decode($hex[1]));
             },
             $text);
     }
