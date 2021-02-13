@@ -2,7 +2,9 @@
 v2.3.7
 ------
 
-
+[mjr] SECURITY: Fix XSS via Text2Html filter (Reported by: Alex
+      Birnberg<birnbergalex@gmail.com>, CVE 2021-26929)
+|+
 
 
 ------
