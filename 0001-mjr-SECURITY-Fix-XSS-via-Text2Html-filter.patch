@@ -1,0 +1,225 @@
+From a2f67da064d7a91440b7a2448e56a6387ab94c67 Mon Sep 17 00:00:00 2001
+From: Michael J Rubinsky <mrubinsk@horde.org>
+Date: Sat, 13 Feb 2021 11:44:42 -0500
+Subject: [PATCH] [mjr] SECURITY: Fix XSS via Text2Html filter
+
+Reported by: Alex Birnberg<birnbergalex@gmail.com, CVE-2021-26929
+---
+ .horde.yml                               |  1 +
+ composer.json                            |  1 +
+ lib/Horde/Text/Filter/Emails.php         | 23 +++++++++++++++------
+ lib/Horde/Text/Filter/Linkurls.php       | 26 ++++++++++++++++++++----
+ lib/Horde/Text/Filter/Text2html.php      | 13 +++++++-----
+ test/Horde/Text/Filter/Text2htmlTest.php |  6 ++++--
+ 6 files changed, 53 insertions(+), 17 deletions(-)
+
+diff --git a/.horde.yml b/.horde.yml
+index d696a81..93a6e61 100644
+--- a/.horde.yml
++++ b/.horde.yml
+@@ -40,6 +40,7 @@ dependencies:
+     pear:
+       pear.horde.org/Horde_Exception: ^2
+       pear.horde.org/Horde_Idna: ^1
++      pear.horde.org/Horde_Secret: ^2
+       pear.horde.org/Horde_Util: ^2
+   optional:
+     pear:
+diff --git a/composer.json b/composer.json
+index a8a6fef..b55e891 100644
+--- a/composer.json
++++ b/composer.json
+@@ -33,6 +33,7 @@
+         "php": "^5.3 || ^7",
+         "pear-pear.horde.org/Horde_Exception": "^2",
+         "pear-pear.horde.org/Horde_Idna": "^1",
++        "pear-pear.horde.org/Horde_Secret": "^2",
+         "pear-pear.horde.org/Horde_Util": "^2"
+     },
+     "suggest": {
+diff --git a/lib/Horde/Text/Filter/Emails.php b/lib/Horde/Text/Filter/Emails.php
+index 2140003..4802ea1 100644
+--- a/lib/Horde/Text/Filter/Emails.php
++++ b/lib/Horde/Text/Filter/Emails.php
+@@ -34,7 +34,8 @@ class Horde_Text_Filter_Emails extends Horde_Text_Filter_Base
+      */
+     protected $_params = array(
+         'class' => '',
+-        'encode' => false
++        'encode' => false,
++        'secret' => null
+     );
+ 
+     /**
+@@ -85,9 +86,12 @@ EOR;
+     public function regexCallback($matches)
+     {
+         $data = $this->_regexCallback($matches);
+-
++        $secret = new Horde_Secret();
++        if (empty($this->_params['secretKey'])) {
++            $this->_params['secretKey'] = $secret->setKey();
++        }
+         if ($this->_params['encode']) {
+-            $data = "\01\01\01" . base64_encode($data) . "\01\01\01";
++            $data = "\01\01\01" . base64_encode($secret->write($this->_params['secretKey'], $data)) . "\01\01\01";
+         }
+ 
+         return $matches[1] . $matches[2] . (isset($matches[9]) ? $matches[9] : '') .
+@@ -119,15 +123,22 @@ EOR;
+      * "Decodes" the text formerly encoded by using the "encode" parameter.
+      *
+      * @param string $text  An encoded text.
++     * @param string $key   An optional key to use with Horde_Secret encryption.
++     *                      If omitted a key will be fetched from a Horde_Secret
++     *                      instance.
+      *
+      * @return string  The decoded text.
+      */
+-    public static function decode($text)
++    public static function decode($text, $key = null)
+     {
++        $secret = new Horde_Secret();
++        if (empty($key)) {
++            $key = $secret->getKey();
++        }
+         return preg_replace_callback(
+             '/\01\01\01([\w=+\/]*)\01\01\01/',
+-            function($hex) {
+-                return base64_decode($hex[1]);
++            function($hex) use ($secret, $key) {
++                return  $secret->read($key, base64_decode($hex[1]));
+             },
+             $text);
+     }
+diff --git a/lib/Horde/Text/Filter/Linkurls.php b/lib/Horde/Text/Filter/Linkurls.php
+index c1c3c0d..2589101 100644
+--- a/lib/Horde/Text/Filter/Linkurls.php
++++ b/lib/Horde/Text/Filter/Linkurls.php
+@@ -29,6 +29,10 @@
+  *               DEFAULT: false
+  *   - target: (string) The link target.
+  *             DEFAULT: '_blank'
++ *   - secretKey: (string) A key to use for Horde_Secret encryption of encoded
++ *                html tags (see the 'encode' paramter).
++ *             DEFAULT: A default key will be created by an instance of
++ *             Horde_Secret.
+  *
+  * Copyright 2003-2017 Horde LLC (http://www.horde.org/)
+  *
+@@ -60,6 +64,7 @@ class Horde_Text_Filter_Linkurls extends Horde_Text_Filter_Base
+         'encode' => false,
+         'nofollow' => false,
+         'target' => '_blank',
++        'secretKey' => null
+     );
+ 
+     /**
+@@ -172,8 +177,13 @@ END_OF_REGEX;
+                 '<meta http-equiv="x-dns-prefetch-control" value="on" />';
+         }
+ 
++        $secret = new Horde_Secret();
++        if (empty($this->_params['secretKey'])) {
++            $this->_params['secretKey'] = $secret->setKey();
++        }
++
+         if ($this->_params['encode']) {
+-            $replacement = chr(0) . chr(0) . chr(0) . base64_encode($replacement) . chr(0) . chr(0) . chr(0);
++            $replacement = chr(0) . chr(0) . chr(0) . base64_encode($secret->write($this->_params['secretKey'], $replacement)) . chr(0) . chr(0) . chr(0);
+         }
+ 
+         return $replacement;
+@@ -183,15 +193,23 @@ END_OF_REGEX;
+      * "Decodes" the text formerly encoded by using the "encode" parameter.
+      *
+      * @param string $text  An encoded text.
++     * @param string $key   An optional key to use with Horde_Secret encryption.
++     *                      If omitted a key will be fetched from a Horde_Secret
++     *                      instance.
+      *
+      * @return string  The decoded text.
+      */
+-    public static function decode($text)
++    public static function decode($text, $key = null)
+     {
++        $secret = new Horde_Secret();
++        if (empty($key)) {
++            $key = $secret->getKey();
++        }
++
+         return preg_replace_callback(
+             '/\00\00\00([\w=+\/]*)\00\00\00/',
+-            function($hex) {
+-                return base64_decode($hex[1]);
++            function($hex) use ($secret, $key) {
++                return $secret->read($key, base64_decode($hex[1]));
+             },
+             $text);
+     }
+diff --git a/lib/Horde/Text/Filter/Text2html.php b/lib/Horde/Text/Filter/Text2html.php
+index a1c5c1b..2f68c17 100644
+--- a/lib/Horde/Text/Filter/Text2html.php
++++ b/lib/Horde/Text/Filter/Text2html.php
+@@ -37,7 +37,8 @@ class Horde_Text_Filter_Text2html extends Horde_Text_Filter_Base
+         'linkurls' => false,
+         'text2html' => false,
+         'parselevel' => 0,
+-        'space2html' => false
++        'space2html' => false,
++        'secretKey' => null
+     );
+ 
+     /**
+@@ -144,7 +145,8 @@ class Horde_Text_Filter_Text2html extends Horde_Text_Filter_Base
+                 $filters = $this->_params['linkurls'];
+             } else {
+                 $filters['linkurls'] = array(
+-                    'encode' => true
++                    'encode' => true,
++                    'secretKey' => $this->_params['secretKey']
+                 );
+             }
+ 
+@@ -155,7 +157,8 @@ class Horde_Text_Filter_Text2html extends Horde_Text_Filter_Base
+                     $filters += $this->_params['emails'];
+                 } else {
+                     $filters['emails'] = array(
+-                        'encode' => true
++                        'encode' => true,
++                        'secretKey' => $this->_params['secretKey']
+                     );
+                 }
+             }
+@@ -201,9 +204,9 @@ class Horde_Text_Filter_Text2html extends Horde_Text_Filter_Base
+ 
+         /* Do in-lining of http://xxx.xxx to link, xxx@xxx.xxx to email. */
+         if ($this->_params['parselevel'] < self::NOHTML) {
+-            $text = Horde_Text_Filter_Linkurls::decode($text);
++            $text = Horde_Text_Filter_Linkurls::decode($text, $this->_params['secretKey']);
+             if ($this->_params['parselevel'] < self::MICRO_LINKURL) {
+-                $text = Horde_Text_Filter_Emails::decode($text);
++                $text = Horde_Text_Filter_Emails::decode($text, $this->_params['secretKey']);
+             }
+ 
+             if ($this->_params['space2html']) {
+diff --git a/test/Horde/Text/Filter/Text2htmlTest.php b/test/Horde/Text/Filter/Text2htmlTest.php
+index 8434964..09a35e1 100644
+--- a/test/Horde/Text/Filter/Text2htmlTest.php
++++ b/test/Horde/Text/Filter/Text2htmlTest.php
+@@ -19,8 +19,10 @@ class Horde_Text_Filter_Text2htmlTest extends PHPUnit_Framework_TestCase
+         $this->assertEquals(
+             $expected,
+             Horde_Text_Filter::filter($input, 'text2html', array(
+-                'parselevel' => $level
+-            ))
++                'parselevel' => $level,
++                'secretKey' => "mGmEXue4Az0YurdMK6p3alB"
++                )
++            )
+         );
+     }
+ 
+-- 
+2.28.0
+
