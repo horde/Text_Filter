@@ -34,7 +34,8 @@ class Horde_Text_Filter_Emails extends Horde_Text_Filter_Base
      */
     protected $_params = array(
         'class' => '',
-        'encode' => false
+        'encode' => false,
+        'secret' => null
     );
 
     /**
@@ -85,9 +86,12 @@ EOR;
     public function regexCallback($matches)
     {
         $data = $this->_regexCallback($matches);
-
+        $secret = new Horde_Secret();
+        if (empty($this->_params['secretKey'])) {
+            $this->_params['secretKey'] = $secret->setKey();
+        }
         if ($this->_params['encode']) {
-            $data = "\01\01\01" . base64_encode($data) . "\01\01\01";
+            $data = "\01\01\01" . base64_encode($secret->write($this->_params['secretKey'], $data)) . "\01\01\01";
         }
 
         return $matches[1] . $matches[2] . (isset($matches[9]) ? $matches[9] : '') .
@@ -119,15 +123,22 @@ EOR;
      * "Decodes" the text formerly encoded by using the "encode" parameter.
      *
      * @param string $text  An encoded text.
+     * @param string $key   An optional key to use with Horde_Secret encryption.
+     *                      If omitted a key will be fetched from a Horde_Secret
+     *                      instance.
      *
      * @return string  The decoded text.
      */
-    public static function decode($text)
+    public static function decode($text, $key = null)
     {
+        $secret = new Horde_Secret();
+        if (empty($key)) {
+            $key = $secret->getKey();
+        }
         return preg_replace_callback(
             '/\01\01\01([\w=+\/]*)\01\01\01/',
-            function($hex) {
-                return base64_decode($hex[1]);
+            function($hex) use ($secret, $key) {
+                return  $secret->read($key, base64_decode($hex[1]));
             },
             $text);
     }

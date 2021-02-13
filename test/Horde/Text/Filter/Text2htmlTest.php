@@ -19,8 +19,10 @@ class Horde_Text_Filter_Text2htmlTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(
             $expected,
             Horde_Text_Filter::filter($input, 'text2html', array(
-                'parselevel' => $level
-            ))
+                'parselevel' => $level,
+                'secretKey' => "mGmEXue4Az0YurdMK6p3alB"
+                )
+            )
         );
     }
 
