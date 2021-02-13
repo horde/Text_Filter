@@ -3,7 +3,7 @@
  <name>Horde_Text_Filter</name>
  <channel>pear.horde.org</channel>
  <summary>Text filtering and conversion library</summary>
- <description>Common methods for fitering and converting text.</description>
+ <description>Common methods for filtering and converting text.</description>
  <lead>
   <name>Chuck Hagenbuch</name>
   <user>chuck</user>
