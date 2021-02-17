@@ -9,7 +9,6 @@
     identifier: LGPL-2.1
     uri: http://www.horde.org/licenses/lgpl21
   notes: |+
-
 2.3.7:
   api: 2.3.0
   state:
@@ -21,7 +20,6 @@
     uri: http://www.horde.org/licenses/lgpl21
   notes: |
     [mjr] SECURITY: Fix XSS via Text2Html filter (Reported by: Alex Birnberg<birnbergalex@gmail.com>, CVE 2021-26929)
-
 2.3.6:
   api: 2.3.0
   state:
@@ -33,7 +31,7 @@
     uri: http://www.horde.org/licenses/lgpl21
   notes: |+
     [jan] Fix regular expression error with PHP 7.3 (Remi Collet <remi@remirepo.net>, PR 1).
-
+    
 2.3.5:
   api: 2.3.0
   state:
