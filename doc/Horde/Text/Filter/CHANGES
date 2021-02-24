@@ -1,6 +1,6 @@
-------
-v2.3.6
-------
+------------
+v3.0.0alpha1
+------------
 
 [jan] Fix regular expression error with PHP 7.3 (Remi Collet
       <remi@remirepo.net>, PR 1).

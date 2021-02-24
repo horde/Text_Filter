@@ -1,18 +1,18 @@
 {
-    "name": "horde/text-filter",
+    "name": "horde/text_filter",
     "description": "Text filtering and conversion library",
-    "type": "library",
+    "type": "horde-library",
     "homepage": "https://www.horde.org/libraries/Horde_Text_Filter",
     "license": "LGPL-2.1",
     "authors": [
         {
-            "name": "Chuck Hagenbuch",
-            "email": "chuck@horde.org",
+            "name": "Jan Schneider",
+            "email": "jan@horde.org",
             "role": "lead"
         },
         {
-            "name": "Jan Schneider",
-            "email": "jan@horde.org",
+            "name": "Chuck Hagenbuch",
+            "email": "chuck@horde.org",
             "role": "lead"
         },
         {
@@ -21,34 +21,34 @@
             "role": "developer"
         }
     ],
-    "version": "2.3.6",
-    "time": "2017-11-11",
+    "version": "3.0.0alpha1",
+    "time": "2021-02-24",
     "repositories": [
         {
-            "type": "pear",
-            "url": "https://pear.horde.org"
+            "type": "composer",
+            "url": "https://horde-satis.maintaina.com/"
         }
     ],
     "require": {
+        "horde/horde-installer-plugin": "*",
         "php": "^5.3 || ^7",
-        "pear-pear.horde.org/Horde_Exception": "^2",
-        "pear-pear.horde.org/Horde_Idna": "^1",
-        "pear-pear.horde.org/Horde_Util": "^2"
+        "horde/exception": "^2",
+        "horde/idna": "^1",
+        "horde/util": "^2"
     },
     "suggest": {
-        "pear-pear.horde.org/Horde_Test": "^2.1",
-        "pear-pear.horde.org/Horde_Text_Filter_Jsmin": "^1",
-        "pear-pear.horde.org/Horde_Text_Flowed": "^2",
-        "pear-pear.horde.org/Horde_Translation": "^2.2",
+        "horde/test": "^2.1",
+        "horde/text_filter_jsmin": "^1",
+        "horde/text_flowed": "^2",
+        "horde/translation": "^2.2",
         "ext-tidy": "*"
-    },
-    "replace": {
-        "pear-pear.horde.org/Horde_Text_Filter": "2.*",
-        "pear-horde/Horde_Text_Filter": "2.*"
     },
     "autoload": {
         "psr-0": {
             "Horde_Text_Filter": "lib/"
+        },
+        "psr-4": {
+            "Horde\\Text\\Filter\\": "src/"
         }
     }
 }
