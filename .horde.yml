@@ -29,10 +29,10 @@ version:
   release: 2.3.8
   api: 2.3.0
 state:
-  release: stable
-  api: stable
+  release: alpha
+  api: alpha
 license:
-  identifier: LGPL-2.1
+  identifier: LGPL-2.1-only
   uri: http://www.horde.org/licenses/lgpl21
 dependencies:
   required:
@@ -43,10 +43,10 @@ dependencies:
       pear.horde.org/Horde_Secret: ^2
       pear.horde.org/Horde_Util: ^2
   optional:
-    pear:
-      pear.horde.org/Horde_Test: ^2.1
-      pear.horde.org/Horde_Text_Filter_Jsmin: ^1
-      pear.horde.org/Horde_Text_Flowed: ^2
-      pear.horde.org/Horde_Translation: ^2.2
+    composer:
+      horde/test: ^3
+      horde/text_filter_jsmin: ^2
+      horde/text_flowed: ^3
+      horde/translation: ^3
     ext:
       tidy: '*'

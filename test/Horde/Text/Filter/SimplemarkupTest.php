@@ -11,6 +11,9 @@
  * @package    Text_Filter
  * @subpackage UnitTests
  */
+namespace Horde\Text\Filter;
+use PHPUnit\Framework\TestCase;
+use \Horde_Text_Filter;
 
 /**
  * Tests for the simple markup filter.
@@ -22,7 +25,7 @@
  * @package    Text_Filter
  * @subpackage UnitTests
  */
-class Horde_Text_Filter_SimplemarkupTest extends PHPUnit_Framework_TestCase
+class SimplemarkupTest extends TestCase
 {
     /**
      * @dataProvider markupExamples
