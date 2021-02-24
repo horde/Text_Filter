@@ -31,16 +31,16 @@
     ],
     "require": {
         "horde/horde-installer-plugin": "*",
-        "php": "^5.3 || ^7",
-        "horde/exception": "^2",
-        "horde/idna": "^1",
-        "horde/util": "^2"
+        "php": "^7",
+        "horde/exception": "^3",
+        "horde/idna": "^2",
+        "horde/util": "^3"
     },
     "suggest": {
-        "horde/test": "^2.1",
-        "horde/text_filter_jsmin": "^1",
-        "horde/text_flowed": "^2",
-        "horde/translation": "^2.2",
+        "horde/test": "^3",
+        "horde/text_filter_jsmin": "^2",
+        "horde/text_flowed": "^3",
+        "horde/translation": "^3",
         "ext-tidy": "*"
     },
     "autoload": {
