@@ -8,8 +8,10 @@
  * @package    Text_Filter
  * @subpackage UnitTests
  */
+namespace Horde\Text\Filter;
+use PHPUnit\Framework\TestCase;
 
-class Horde_Text_Filter_XssTest extends PHPUnit_Framework_TestCase
+class XssTest extends TestCase
 {
     /**
      * Test cases from http://ha.ckers.org/xss.html

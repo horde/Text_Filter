@@ -8,7 +8,10 @@
  * @package    Text_Filter
  * @subpackage UnitTests
  */
-class Horde_Text_Filter_Msoffice_Test extends PHPUnit_Framework_TestCase
+namespace Horde\Text\Filter;
+use PHPUnit\Framework\TestCase;
+
+class MsofficeTest extends TestCase
 {
     public function testMsoNormalCss()
     {

@@ -8,8 +8,10 @@
  * @package    Text_Filter
  * @subpackage UnitTests
  */
+namespace Horde\Text\Filter;
+use PHPUnit\Framework\TestCase;
 
-class Horde_Text_Filter_EmailsTest extends PHPUnit_Framework_TestCase
+class EmailsTest extends TestCase
 {
     /**
      * @dataProvider emailsProvider

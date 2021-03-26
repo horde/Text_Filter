@@ -11,6 +11,8 @@
  * @package    Text_Filter
  * @subpackage UnitTests
  */
+namespace Horde\Text\Filter;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Tests for the words filter.
@@ -22,11 +24,11 @@
  * @package    Text_Filter
  * @subpackage UnitTests
  */
-class Horde_Text_Filter_WordsTest extends PHPUnit_Framework_TestCase
+class WordsTest extends TestCase
 {
     private $words;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->words = array('foo', 'bar');
     }

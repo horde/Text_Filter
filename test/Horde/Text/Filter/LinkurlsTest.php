@@ -8,7 +8,10 @@
  * @package    Text_Filter
  * @subpackage UnitTests
  */
-class Horde_Text_Filter_LinkurlsTest extends Horde_Test_Case
+namespace Horde\Text\Filter;
+use Horde_Test_Case as TestCase;
+
+class LinkurlsTest extends TestCase
 {
     /**
      * @dataProvider urlProvider
