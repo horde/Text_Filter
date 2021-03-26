@@ -10,6 +10,8 @@
  */
 namespace Horde\Text\Filter;
 use PHPUnit\Framework\TestCase;
+use \Horde_Text_Filter;
+use \Horde_String;
 
 class XssTest extends TestCase
 {

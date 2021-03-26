@@ -10,6 +10,8 @@
  */
 namespace Horde\Text\Filter;
 use PHPUnit\Framework\TestCase;
+use \Horde_Text_Filter;
+use \Horde_Text_Filter_Text2html;
 
 class Text2htmlTest extends TestCase
 {

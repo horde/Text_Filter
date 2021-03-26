@@ -13,6 +13,7 @@
  */
 namespace Horde\Text\Filter;
 use PHPUnit\Framework\TestCase;
+use \Horde_Text_Filter;
 
 /**
  * Tests for the simple markup filter.

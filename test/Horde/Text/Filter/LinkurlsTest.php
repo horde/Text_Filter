@@ -10,6 +10,7 @@
  */
 namespace Horde\Text\Filter;
 use Horde_Test_Case as TestCase;
+use \Horde_Text_Filter;
 
 class LinkurlsTest extends TestCase
 {
