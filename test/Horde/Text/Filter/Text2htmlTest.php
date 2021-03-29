@@ -8,8 +8,12 @@
  * @package    Text_Filter
  * @subpackage UnitTests
  */
+namespace Horde\Text\Filter;
+use PHPUnit\Framework\TestCase;
+use \Horde_Text_Filter;
+use \Horde_Text_Filter_Text2html;
 
-class Horde_Text_Filter_Text2htmlTest extends PHPUnit_Framework_TestCase
+class Text2htmlTest extends TestCase
 {
     /**
      * @dataProvider text2htmlProvider

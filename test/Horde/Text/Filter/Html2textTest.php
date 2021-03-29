@@ -8,8 +8,11 @@
  * @package    Text_Filter
  * @subpackage UnitTests
  */
+namespace Horde\Text\Filter;
+use PHPUnit\Framework\TestCase;
+use \Horde_Text_Filter;
 
-class Horde_Text_Filter_Html2textTest extends PHPUnit_Framework_TestCase
+class Html2textTest extends TestCase
 {
     /**
      * @dataProvider html2textProvider
@@ -200,8 +203,8 @@ EOT;
         // Blockquote
         $html = <<<EOT
 <blockquote type="cite">
-<a href="http://www.horde.org">Horde Homepage</a><br />
-Some inline <a href="http://www.horde.org">link</a>.<br />
+<a href="http://www.horde.org">> Horde Homepage</a><br />
+> Some inline <a href="http://www.horde.org">link</a>.<br />
 </blockquote>
 EOT;
         $expected = <<<EOT
@@ -218,9 +221,10 @@ EOT;
 
         $html = <<<EOT
 <blockquote type="cite">
-<h2>Heading inside quoting</h2>
-<p>This is a paragraph inside a block quoting. The result should be several
-lines prefixed with the &gt; character.</p>
+<h2>> Heading inside quoting</h2>
+><br/>
+<p> This is a paragraph inside a block quoting. The result should be
+> several lines prefixed with the &gt; character.</p>
 </blockquote>
 EOT;
         $expected = <<<EOT
@@ -236,9 +240,9 @@ EOT;
 <p>Zitat von John Doe &lt;john.doe@example.com&gt;:</p>
   <blockquote type="cite"> 
     <div class="Section1"> 
-      <p class="MsoNormal"><font size="2" face="Arial"><span style="font-size: 10pt; font-family: Arial;">Hallo lieber John,<o:p /></span></font></p> 
-      <p class="MsoNormal"><font size="2" face="Arial"><span style="font-size: 10pt; font-family: Arial;"><o:p> </o:p></span></font></p> 
-      <p class="MsoNormal"><font size="2" face="Arial"><span style="font-size: 10pt; font-family: Arial;">Blah, blah.'<o:p /></span></font></p> 
+      <p class="MsoNormal"><font size="2" face="Arial"><span style="font-size: 10pt; font-family: Arial;">> Hallo lieber John,<o:p /></span></font></p>
+      <p class="MsoNormal"><font size="2" face="Arial"><span style="font-size: 10pt; font-family: Arial;"><o:p>></o:p></span></font></p> 
+      <p class="MsoNormal"><font size="2" face="Arial"><span style="font-size: 10pt; font-family: Arial;">> Blah, blah.'<o:p /></span></font></p> 
       <p class="MsoNormal"><font size="2" face="Arial"><span style="font-size: 10pt; font-family: Arial;"><o:p> </o:p></span></font></p> 
       <p class="MsoNormal"><font size="3" face="Times New Roman"><span lang="EN-GB" style="font-size: 12pt;"><o:p> </o:p></span></font></p> 
     </div> 
@@ -263,14 +267,14 @@ EOT;
         $html = <<<EOT
 <p>Zitat von Jane Doe &lt;jane.doe@example.com&gt;:</p>
   <blockquote type="cite">
-Jan Schneider a écrit&nbsp;:<br/>
-
-    <blockquote type="cite" cite="mid:20081007135151.190315kzjzymtbhc@neo.wg.de">Zitat von Jane Doe
+> Jan Schneider a écrit&nbsp;:<br/>
+>
+    <blockquote type="cite" cite="mid:20081007135151.190315kzjzymtbhc@neo.wg.de">>> Zitat von Jane Doe
 <a href="mailto:jane.doe@example.com" class="moz-txt-link-rfc2396E">&lt;jane.doe@example.com&gt;</a>:
-  <br /> <br /> 
-      <blockquote type="cite">Hi,
-    <br /> <br />
-I prepare the last &quot;horde-webmail-1.2&quot; for production level but I have
+  <br />>> <br /> 
+      <blockquote type="cite">>>>Hi,
+    <br />>>> <br />
+>>> I prepare the last &quot;horde-webmail-1.2&quot; for production level but I have
 few questions:
     <br />
 - is there a way to disable &quot;external_display_cal&quot; in kronolith, I
