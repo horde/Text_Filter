@@ -4,7 +4,7 @@
     "description": "Text filtering and conversion library",
     "type": "horde-library",
     "homepage": "https://www.horde.org/libraries/Horde_Text_Filter",
-    "license": "LGPL-2.1",
+    "license": "LGPL-2.1-only",
     "authors": [
         {
             "name": "Jan Schneider",
@@ -22,7 +22,7 @@
             "role": "developer"
         }
     ],
-    "version": "3.0.0alpha2",
+    
     "time": "2021-02-24",
     "repositories": [
         {
@@ -31,17 +31,17 @@
         }
     ],
     "require": {
-        "horde/horde-installer-plugin": "*",
-        "php": "^7",
-        "horde/exception": "^3",
-        "horde/idna": "^2",
-        "horde/util": "^3"
+        "horde/horde-installer-plugin": "^2 || dev-FRAMEWORK_6_0",
+        "php": "^7.4 || ^8",
+        "horde/exception": "^3 || dev-FRAMEWORK_6_0",
+        "horde/idna": "^2 || dev-FRAMEWORK_6_0",
+        "horde/util": "^3 || dev-FRAMEWORK_6_0"
     },
     "suggest": {
-        "horde/test": "^3",
-        "horde/text_filter_jsmin": "^2",
-        "horde/text_flowed": "^3",
-        "horde/translation": "^3",
+        "horde/test": "^3 || dev-FRAMEWORK_6_0",
+        "horde/text_filter_jsmin": "^2 || dev-FRAMEWORK_6_0",
+        "horde/text_flowed": "^3 || dev-FRAMEWORK_6_0",
+        "horde/translation": "^3 || dev-FRAMEWORK_6_0",
         "ext-tidy": "*"
     },
     "autoload": {
