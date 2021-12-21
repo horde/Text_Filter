@@ -9,7 +9,7 @@
  * @subpackage UnitTests
  */
 
-class Horde_Text_Filter_EmailsTest extends PHPUnit_Framework_TestCase
+class Horde_Text_Filter_EmailsTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @dataProvider emailsProvider

@@ -22,12 +22,13 @@
  * @package    Text_Filter
  * @subpackage UnitTests
  */
-class Horde_Text_Filter_WordsTest extends PHPUnit_Framework_TestCase
+class Horde_Text_Filter_WordsTest extends \PHPUnit\Framework\TestCase
 {
     private $words;
 
-    public function setUp()
+    public function setUp(): void
     {
+        parent::setUp();
         $this->words = array('foo', 'bar');
     }
 

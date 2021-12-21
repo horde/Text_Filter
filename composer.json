@@ -1,6 +1,6 @@
 {
-    "name": "horde/text-filter",
-    "description": "Text filtering and conversion library",
+    "name": "bytestream/horde-text-filter",
+    "description": "Horde text filtering and conversion library",
     "type": "library",
     "homepage": "https://www.horde.org/libraries/Horde_Text_Filter",
     "license": "LGPL-2.1",
@@ -21,35 +21,25 @@
             "role": "developer"
         }
     ],
-    "version": "2.3.8",
-    "time": "2021-02-17",
-    "repositories": [
-        {
-            "type": "pear",
-            "url": "https://pear.horde.org"
-        }
-    ],
     "require": {
-        "php": "^5.3 || ^7",
-        "pear-pear.horde.org/Horde_Exception": "^2",
-        "pear-pear.horde.org/Horde_Idna": "^1",
-        "pear-pear.horde.org/Horde_Secret": "^2",
-        "pear-pear.horde.org/Horde_Util": "^2"
+        "php": "^7.4 || ^8.0",
+        "bytestream/horde-exception": "^2",
+        "bytestream/horde-idna": "^1",
+        "bytestream/horde-secret": "^2",
+        "bytestream/horde-util": "^2"
     },
-    "suggest": {
-        "pear-pear.horde.org/Horde_Test": "^2.1",
-        "pear-pear.horde.org/Horde_Text_Filter_Jsmin": "^1",
-        "pear-pear.horde.org/Horde_Text_Flowed": "^2",
-        "pear-pear.horde.org/Horde_Translation": "^2.2",
-        "ext-tidy": "*"
-    },
-    "replace": {
-        "pear-pear.horde.org/Horde_Text_Filter": "2.*",
-        "pear-horde/Horde_Text_Filter": "2.*"
+    "require-dev": {
+        "phpunit/phpunit": "^9.5",
+        "bytestream/horde-text-flowed": "^2.1"
     },
     "autoload": {
         "psr-0": {
             "Horde_Text_Filter": "lib/"
+        }
+    },
+    "autoload-dev": {
+        "psr-0": {
+            "Horde_Text_Filter": "test/"
         }
     }
 }

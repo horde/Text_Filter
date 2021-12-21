@@ -9,7 +9,7 @@
  * @subpackage UnitTests
  */
 
-class Horde_Text_Filter_Html2textTest extends PHPUnit_Framework_TestCase
+class Horde_Text_Filter_Html2textTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @dataProvider html2textProvider

@@ -8,7 +8,7 @@
  * @package    Text_Filter
  * @subpackage UnitTests
  */
-class Horde_Text_Filter_LinkurlsTest extends Horde_Test_Case
+class Horde_Text_Filter_LinkurlsTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @dataProvider urlProvider

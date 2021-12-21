@@ -22,7 +22,7 @@
  * @package    Text_Filter
  * @subpackage UnitTests
  */
-class Horde_Text_Filter_SimplemarkupTest extends PHPUnit_Framework_TestCase
+class Horde_Text_Filter_SimplemarkupTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @dataProvider markupExamples
