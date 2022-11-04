@@ -1,11 +1,4 @@
-<<<<<<< HEAD
-------
-v2.3.8
-------
-------
-v2.3.7
-------
-=======
+
 ------------
 v3.0.0alpha3
 ------------
@@ -16,17 +9,38 @@ v3.0.0alpha3
 ------------
 v3.0.0alpha2
 ------------
->>>>>>> e37910c (Development mode for Text_Filter-3.0.0alpha3)
+
+[rla] Release for PHP 8.
+
+------------
+v3.0.0alpha1
+------------
+
+[rla] Create composer version
+
+
+------
+v2.3.8
+------
+
+
+
+
+------
+v2.3.7
+------
 
 [mjr] SECURITY: Fix XSS via Text2Html filter (Reported by: Alex
       Birnberg<birnbergalex@gmail.com>, CVE 2021-26929)
-=======
+
+
 v2.3.6
 ------
-=======
 
 [jan] Fix regular expression error with PHP 7.3 (Remi Collet
       <remi@remirepo.net>, PR 1).
+
+
 
 ------
 v2.3.5
