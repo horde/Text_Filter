@@ -1,5 +1,4 @@
 {
-    "minimum-stability": "dev",
     "name": "horde/text_filter",
     "description": "Text filtering and conversion library",
     "type": "library",
@@ -22,8 +21,7 @@
             "role": "developer"
         }
     ],
-    "version": "2.3.8",
-    "time": "2021-02-17",
+    "time": "2022-11-04",
     "repositories": [
         {
             "type": "composer",
@@ -31,16 +29,20 @@
         }
     ],
     "require": {
-        "horde/horde-installer-plugin": "*",
-        "php": "^5.3 || ^7",
-        "pear-pear.horde.org/Horde_Exception": "^2",
-        "pear-pear.horde.org/Horde_Idna": "^1",
-        "pear-pear.horde.org/Horde_Secret": "^2",
-        "pear-pear.horde.org/Horde_Util": "^2"
+        "php": "^7.4 || ^8",
+        "horde/exception": "^3 || dev-FRAMEWORK_6_0",
+        "horde/idna": "^2 || dev-FRAMEWORK_6_0",
+        "horde/util": "^3 || dev-FRAMEWORK_6_0",
+        "horde/secret": "^3 || dev-FRAMEWORK_6_0"
     },
-    "require-dev": {},
-    "suggest": {
+    "require-dev": {
+        "horde/text_filter_jsmin": "^2 || dev-FRAMEWORK_6_0",
+        "horde/text_flowed": "^3 || dev-FRAMEWORK_6_0",
+        "horde/translation": "^3 || dev-FRAMEWORK_6_0",
         "horde/test": "^3 || dev-FRAMEWORK_6_0",
+        "horde/util": "^3 || dev-FRAMEWORK_6_0"
+    },
+    "suggest": {
         "horde/text_filter_jsmin": "^2 || dev-FRAMEWORK_6_0",
         "horde/text_flowed": "^3 || dev-FRAMEWORK_6_0",
         "horde/translation": "^3 || dev-FRAMEWORK_6_0",

@@ -1,9 +1,9 @@
-
 ------------
 v3.0.0alpha3
 ------------
 
-
+[rla] Re-sync dependencies with upstream and v2 branch.
+|+
 
 
 ------------
@@ -12,19 +12,18 @@ v3.0.0alpha2
 
 [rla] Release for PHP 8.
 
+
 ------------
 v3.0.0alpha1
 ------------
 
-[rla] Create composer version
-
+|
 
 ------
 v2.3.8
 ------
 
-
-
+|+
 
 ------
 v2.3.7
@@ -34,6 +33,7 @@ v2.3.7
       Birnberg<birnbergalex@gmail.com>, CVE 2021-26929)
 
 
+------
 v2.3.6
 ------
 
