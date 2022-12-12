@@ -155,7 +155,8 @@ END_OF_REGEX;
 
         $decoded = $orig_href;
         try {
-            if (strlen($host = $this->_parseurl($orig_href, PHP_URL_HOST))) {
+            $host = $this->_parseurl($orig_href, PHP_URL_HOST);
+            if ($host !== null && strlen($host)) {
                 $decoded = substr_replace(
                     $orig_href,
                     Horde_Idna::decode($host),
@@ -242,7 +243,7 @@ END_OF_REGEX;
             throw new InvalidArgumentException('Malformed URL: ' . $url);
         }
 
-        return urldecode($parts);
+        return $parts !== null ? urldecode($parts) : null;
     }
 
 }
