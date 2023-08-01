@@ -97,7 +97,7 @@ class Horde_Text_Filter
             if (isset($patterns['regexp_callback'])) {
                 foreach ($patterns['regexp_callback'] as $key => $val) {
                     $new_text = preg_replace_callback($key, $val, $text);
-                    if (strlen($new_text) ||
+                    if (strlen(is_null($new_text) ? "" : $new_text) ||
                         (preg_last_error() != PREG_BACKTRACK_LIMIT_ERROR)) {
                         $text = $new_text;
                     }
