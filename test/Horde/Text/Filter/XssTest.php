@@ -9,7 +9,7 @@
  * @subpackage UnitTests
  */
 
-class Horde_Text_Filter_XssTest extends PHPUnit_Framework_TestCase
+class Horde_Text_Filter_XssTest extends Horde_Test_Case
 {
     /**
      * Test cases from http://ha.ckers.org/xss.html

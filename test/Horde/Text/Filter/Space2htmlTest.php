@@ -9,7 +9,7 @@
  * @subpackage UnitTests
  */
 
-class Horde_Text_Filter_Space2htmlTest extends PHPUnit_Framework_TestCase
+class Horde_Text_Filter_Space2htmlTest extends Horde_Test_Case
 {
     /**
      * @dataProvider space2htmlProvider

@@ -9,9 +9,9 @@
  * @subpackage UnitTests
  */
 
-class Horde_Text_Filter_EnvironmentTest extends PHPUnit_Framework_TestCase
+class Horde_Text_Filter_EnvironmentTest extends Horde_Test_Case
 {
-    public function setUp()
+    public function setUp(): void
     {
         putenv('COMMENT=comment');
         putenv('FOO=bar');
