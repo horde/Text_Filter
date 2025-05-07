@@ -1,5 +1,16 @@
 ---
-3.0.0alpha4:
+3.0.0-alpha5:
+  api: 3.0.0-alpha1
+  state:
+    release: true
+    api: true
+  date: 2025-05-07
+  license:
+    identifier: LGPL-2.1-only
+    uri: http://www.horde.org/licenses/lgpl21
+  notes: |
+    fix: Linkurls: Safeguard against non-strings
+3.0.0-alpha4:
   api: 3.0.0alpha1
   state:
     release: alpha
@@ -8,9 +19,10 @@
   license:
     identifier: LGPL-2.1
     uri: http://www.horde.org/licenses/lgpl21
-  notes: |+
-    
-3.0.0alpha3:
+  notes: |-
+    Original version string was 3.0.0alpha4
+    |+
+3.0.0-alpha3:
   api: 3.0.0alpha1
   state:
     release: alpha
@@ -20,9 +32,10 @@
     identifier: LGPL-2.1
     uri: http://www.horde.org/licenses/lgpl21
   notes: |
+    Original version string was 3.0.0alpha3
     [rla] Re-sync dependencies with upstream and v2 branch.
     |+
-3.0.0alpha2:
+3.0.0-alpha2:
   api: 3.0.0alpha1
   state:
     release: alpha
@@ -32,8 +45,9 @@
     identifier: LGPL-2.1
     uri: http://www.horde.org/licenses/lgpl21
   notes: |
+    Original version string was 3.0.0alpha2
     [rla] Release for PHP 8.
-3.0.0alpha1:
+3.0.0-alpha1:
   api: 3.0.0alpha1
   state:
     release: stable
@@ -42,7 +56,9 @@
   license:
     identifier: LGPL-2.1
     uri: http://www.horde.org/licenses/lgpl21
-  notes: |
+  notes: |-
+    Original version string was 3.0.0alpha1
+    |
 2.3.8:
   api: 2.3.0
   state:
@@ -303,6 +319,31 @@
     uri: http://www.horde.org/licenses/lgpl21
   notes: |
     [jan] Update Dutch translation (Arjen de Korte <build+horde@de-korte.org>).
+2.0.0-beta1:
+  api: 1.1.0
+  state:
+    release: beta
+    api: stable
+  date: 2012-07-19
+  license:
+    identifier: LGPL-2.1
+    uri: http://www.horde.org/licenses/lgpl21
+  notes: |
+    Original version string was 2.0.0beta1
+    First beta release for Horde 5.
+    [mms] Merge upstream changes to jsmin filter that caused broken compression of jQuery Mobile file.
+2.0.0-alpha1:
+  api: 1.1.0
+  state:
+    release: alpha
+    api: stable
+  date: 2012-07-06
+  license:
+    identifier: LGPL-2.1
+    uri: http://www.horde.org/licenses/lgpl21
+  notes: |
+    Original version string was 2.0.0alpha1
+    First alpha release for Horde 5.
 2.0.0:
   api: 1.1.0
   state:
@@ -314,29 +355,6 @@
     uri: http://www.horde.org/licenses/lgpl21
   notes: |
     First stable release for Horde 5.
-2.0.0beta1:
-  api: 1.1.0
-  state:
-    release: beta
-    api: stable
-  date: 2012-07-19
-  license:
-    identifier: LGPL-2.1
-    uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    First beta release for Horde 5.
-    [mms] Merge upstream changes to jsmin filter that caused broken compression of jQuery Mobile file.
-2.0.0alpha1:
-  api: 1.1.0
-  state:
-    release: alpha
-    api: stable
-  date: 2012-07-06
-  license:
-    identifier: LGPL-2.1
-    uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    First alpha release for Horde 5.
 1.1.5:
   api: 1.1.0
   state:
@@ -448,40 +466,7 @@
     uri: http://www.horde.org/licenses/lgpl21
   notes: |
     [mms] Remove dependency on Horde_Text_Filter_Csstidy.
-1.0.0:
-  api: 1.0.0
-  state:
-    release: stable
-    api: stable
-  date: 2011-04-06
-  license:
-    identifier: LGPL-2.1
-    uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    First stable release for Horde 4.
-1.0.0RC2:
-  api: 1.0.0
-  state:
-    release: beta
-    api: beta
-  date: 2011-03-29
-  license:
-    identifier: LGPL-2.1
-    uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    Second release candidate for Horde 4.
-1.0.0RC1:
-  api: 1.0.0
-  state:
-    release: beta
-    api: beta
-  date: 2011-03-22
-  license:
-    identifier: LGPL-2.1
-    uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    First release candidate for Horde 4.
-1.0.0beta1:
+1.0.0-beta1:
   api: 1.0.0
   state:
     release: beta
@@ -491,8 +476,9 @@
     identifier: LGPL-2.1
     uri: http://www.horde.org/licenses/lgpl21
   notes: |
+    Original version string was 1.0.0beta1
     Horde_Text_Filter#filter() now throws an exception on error (Bug #9640).
-1.0.0alpha1:
+1.0.0-alpha1:
   api: 1.0.0
   state:
     release: alpha
@@ -502,6 +488,7 @@
     identifier: LGPL-2.1
     uri: http://www.horde.org/licenses/lgpl21
   notes: |
+    Original version string was 1.0.0alpha1
     First alpha release for Horde 4.
     Html2text filter will use horde/Text_Filter, if available, to wrap text.
     Add callback parameter to the Html2text filter.
@@ -516,6 +503,41 @@
     Fix dimming signatures when mixed with quoted text (Bug #4299).
     Added javascript minify filter.
     Add support for using the tidy extension when filtering HTML data.
+1.0.0-RC2:
+  api: 1.0.0
+  state:
+    release: beta
+    api: beta
+  date: 2011-03-29
+  license:
+    identifier: LGPL-2.1
+    uri: http://www.horde.org/licenses/lgpl21
+  notes: |
+    Original version string was 1.0.0RC2
+    Second release candidate for Horde 4.
+1.0.0-RC1:
+  api: 1.0.0
+  state:
+    release: beta
+    api: beta
+  date: 2011-03-22
+  license:
+    identifier: LGPL-2.1
+    uri: http://www.horde.org/licenses/lgpl21
+  notes: |
+    Original version string was 1.0.0RC1
+    First release candidate for Horde 4.
+1.0.0:
+  api: 1.0.0
+  state:
+    release: stable
+    api: stable
+  date: 2011-04-06
+  license:
+    identifier: LGPL-2.1
+    uri: http://www.horde.org/licenses/lgpl21
+  notes: |
+    First stable release for Horde 4.
 0.0.2:
   api: 0.0.2
   state:
