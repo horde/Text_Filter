@@ -155,7 +155,8 @@ END_OF_REGEX;
 
         $decoded = $orig_href;
         try {
-            if (strlen($host = $this->_parseurl($orig_href, PHP_URL_HOST))) {
+            $host = $this->_parseurl($orig_href, PHP_URL_HOST);
+            if (is_string($host) && strlen($host)) {
                 $decoded = substr_replace(
                     $orig_href,
                     Horde_Idna::decode($host),
