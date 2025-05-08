@@ -25,22 +25,22 @@
     "repositories": [],
     "require": {
         "php": "^7.4 || ^8",
-        "horde/exception": "^3",
-        "horde/idna": "^2",
-        "horde/util": "^3",
-        "horde/secret": "^3"
+        "horde/exception": "^3 || dev-FRAMEWORK_6_0",
+        "horde/idna": "^2 || dev-FRAMEWORK_6_0",
+        "horde/util": "^3 || dev-FRAMEWORK_6_0",
+        "horde/secret": "^3 || dev-FRAMEWORK_6_0"
     },
     "require-dev": {
-        "horde/text_filter_jsmin": "^2",
-        "horde/text_flowed": "^3",
-        "horde/translation": "^3",
-        "horde/test": "^3",
-        "horde/util": "^3"
+        "horde/text_filter_jsmin": "^2 || dev-FRAMEWORK_6_0",
+        "horde/text_flowed": "^3 || dev-FRAMEWORK_6_0",
+        "horde/translation": "^3 || dev-FRAMEWORK_6_0",
+        "horde/test": "^3 || dev-FRAMEWORK_6_0",
+        "horde/util": "^3 || dev-FRAMEWORK_6_0"
     },
     "suggest": {
-        "horde/text_filter_jsmin": "^2",
-        "horde/text_flowed": "^3",
-        "horde/translation": "^3",
+        "horde/text_filter_jsmin": "^2 || dev-FRAMEWORK_6_0",
+        "horde/text_flowed": "^3 || dev-FRAMEWORK_6_0",
+        "horde/translation": "^3 || dev-FRAMEWORK_6_0",
         "ext-tidy": "*"
     },
     "autoload": {
