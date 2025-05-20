@@ -24,6 +24,9 @@ class Horde_Text_Filter_Dimsignature extends Horde_Text_Filter_Base
      */
     public function postProcess($text)
     {
+        if (!is_string($text)) {
+            $text = '';
+        }
         $parts = preg_split('/(\n--\s*(?:<br \/>)?\r?\n.*?)(?=<\/?(?:div|span)|$\s)/is', $text, -1, PREG_SPLIT_DELIM_CAPTURE);
         $text = '';
 
