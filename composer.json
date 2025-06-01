@@ -21,7 +21,7 @@
             "role": "developer"
         }
     ],
-    "time": "2025-05-07",
+    "time": "2025-06-01",
     "repositories": [],
     "require": {
         "php": "^7.4 || ^8",
@@ -54,6 +54,11 @@
         }
     },
     "config": {
-        "allow-plugins": []
+        "allow-plugins": {}
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-FRAMEWORK_6_0": "3.x-dev"
+        }
     }
 }
