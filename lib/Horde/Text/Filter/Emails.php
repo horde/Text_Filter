@@ -38,6 +38,7 @@ class Horde_Text_Filter_Emails extends Horde_Text_Filter_Base
         'secret' => null
     );
 
+    protected string $_regexp;
     /**
      * Returns a hash with replace patterns.
      *
