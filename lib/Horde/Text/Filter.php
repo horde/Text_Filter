@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 1999-2026 Horde LLC (http://www.horde.org/)
  *
@@ -38,7 +39,7 @@ class Horde_Text_Filter
      * @return Horde_Text_Filter_Base  The newly created concrete instance.
      * @throws Horde_Text_Filter_Exception
      */
-    public static function factory($driver, $params = array())
+    public static function factory($driver, $params = [])
     {
         /* Base drivers (in Filter/ directory). */
         $class = __CLASS__ . '_' . HordeString::ucfirst(basename($driver));
@@ -65,17 +66,17 @@ class Horde_Text_Filter
      * @return string  The transformed text.
      * @throws Horde_Text_Filter_Exception
      */
-    public static function filter($text, $filters = array(), $params = array())
+    public static function filter($text, $filters = [], $params = [])
     {
         if (!is_array($filters)) {
-            $filters = array($filters);
-            $params = array($params);
+            $filters = [$filters];
+            $params = [$params];
         }
 
         $params = array_values($params);
 
         foreach (array_values($filters) as $num => $filter) {
-            $filterOb = self::factory($filter, isset($params[$num]) ? $params[$num] : array());
+            $filterOb = self::factory($filter, $params[$num] ?? []);
             $patterns = $filterOb->getPatterns();
 
             /* Pre-processing. */
@@ -89,8 +90,8 @@ class Horde_Text_Filter
             /* preg_replace complex patterns. */
             if (isset($patterns['regexp'])) {
                 $new_text = preg_replace(array_keys($patterns['regexp']), array_values($patterns['regexp']), $text);
-                if (($new_text !== null && strlen($new_text)) ||
-                    (preg_last_error() != PREG_BACKTRACK_LIMIT_ERROR)) {
+                if (($new_text !== null && strlen($new_text))
+                    || (preg_last_error() != PREG_BACKTRACK_LIMIT_ERROR)) {
                     $text = $new_text;
                 }
             }
@@ -99,8 +100,8 @@ class Horde_Text_Filter
             if (isset($patterns['regexp_callback'])) {
                 foreach ($patterns['regexp_callback'] as $key => $val) {
                     $new_text = preg_replace_callback($key, $val, $text);
-                    if (($new_text !== null && strlen($new_text)) ||
-                        (preg_last_error() != PREG_BACKTRACK_LIMIT_ERROR)) {
+                    if (($new_text !== null && strlen($new_text))
+                        || (preg_last_error() != PREG_BACKTRACK_LIMIT_ERROR)) {
                         $text = $new_text;
                     }
                 }

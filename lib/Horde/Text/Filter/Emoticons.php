@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The Horde_Text_Filter_Emoticons:: class finds emoticon strings in a block
  * of text and does a transformation on them.
@@ -11,7 +12,7 @@
  *            DEFAULT: false
  * </pre>
  *
- * Copyright 2003-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2003-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (LGPL). If you
  * did not receive this file, see http://www.horde.org/licenses/lgpl21.
@@ -28,13 +29,13 @@ class Horde_Text_Filter_Emoticons extends Horde_Text_Filter_Base
      *
      * @var array
      */
-    protected $_params = array(
-        'entities' => false
-    );
+    protected $_params = [
+        'entities' => false,
+    ];
 
     /* List complex strings before simpler ones, otherwise for example :((
      * would be matched against :( before :(( is found. */
-    protected $_emoticons = array(
+    protected $_emoticons = [
         ':/' => 'frustrated', ':-/' => 'frustrated',
         // ':*>' => 'blush',
         ':e' => 'disappointed',
@@ -80,7 +81,7 @@ class Horde_Text_Filter_Emoticons extends Horde_Text_Filter_Base
         ';-)' => 'wink', ';)' => 'wink',
         ':#)' => 'clown', ':o)' => 'clown',
         ':)' => 'smile', ':-)' => 'smile',
-    );
+    ];
 
     /**
      * Returns a hash with replace patterns.
@@ -106,9 +107,9 @@ class Horde_Text_Filter_Emoticons extends Horde_Text_Filter_Base
          * found in any smiley. */
         $regexp = '{' . $beg_pattern . implode('|', $patterns) . $end_pattern . '}';
 
-        return array('regexp_callback' => array(
-            $regexp => array($this, 'emoticonReplace')
-        ));
+        return ['regexp_callback' => [
+            $regexp => [$this, 'emoticonReplace'],
+        ]];
     }
 
     /**
@@ -147,7 +148,7 @@ class Horde_Text_Filter_Emoticons extends Horde_Text_Filter_Base
     {
         return is_null($icon)
             ? $this->_emoticons
-            : (isset($this->_emoticons[$icon]) ? $this->_emoticons[$icon] : null);
+            : ($this->_emoticons[$icon] ?? null);
     }
 
 }

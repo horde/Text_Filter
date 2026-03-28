@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The Horde_Text_Filter_Emails:: class finds email addresses in a block of
  * text and turns them into links.
@@ -14,7 +15,7 @@
  *          DEFAULT: false
  * </pre>
  *
- * Copyright 2003-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2003-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (LGPL). If you
  * did not receive this file, see http://www.horde.org/licenses/lgpl21.
@@ -32,11 +33,11 @@ class Horde_Text_Filter_Emails extends Horde_Text_Filter_Base
      *
      * @var array
      */
-    protected $_params = array(
+    protected $_params = [
         'class' => '',
         'encode' => false,
-        'secret' => null
-    );
+        'secret' => null,
+    ];
 
     protected string $_regexp;
     /**
@@ -47,33 +48,33 @@ class Horde_Text_Filter_Emails extends Horde_Text_Filter_Base
     public function getPatterns()
     {
         $this->_regexp = <<<EOR
-        /
-            # Version 1: mailto: links with any valid email characters.
-            # Pattern 1: Outlook parenthesizes in square brackets
-            (\[\s*)?
-            # Pattern 2: mailto: protocol prefix
-            (mailto:\s?)
-            # Pattern 3: email address
-            ([^\s\?"<&]*)
-            # Pattern 4: closing angle brackets?
-            (&gt;)?
-            # Pattern 5 to 7: Optional parameters
-            ((\?)([^\s"<]*[\w+#?\/&=]))?
-            # Pattern 8: Closing Outlook square bracket
-            ((?(1)\s*\]))
-        |
-            # Version 2 Pattern 9 and 10: simple email addresses.
-            (^|\s|&lt;|<|\[)([\w\-+.=]+@[-A-Z0-9.]*[A-Z0-9])
-            # Pattern 11 to 13: Optional parameters
-            ((\?)([^\s"<]*[\w+#?\/&=]))?
-            # Pattern 14: Optional closing bracket
-            (>)?
-        /ix
-EOR;
+                    /
+                        # Version 1: mailto: links with any valid email characters.
+                        # Pattern 1: Outlook parenthesizes in square brackets
+                        (\[\s*)?
+                        # Pattern 2: mailto: protocol prefix
+                        (mailto:\s?)
+                        # Pattern 3: email address
+                        ([^\s\?"<&]*)
+                        # Pattern 4: closing angle brackets?
+                        (&gt;)?
+                        # Pattern 5 to 7: Optional parameters
+                        ((\?)([^\s"<]*[\w+#?\/&=]))?
+                        # Pattern 8: Closing Outlook square bracket
+                        ((?(1)\s*\]))
+                    |
+                        # Version 2 Pattern 9 and 10: simple email addresses.
+                        (^|\s|&lt;|<|\[)([\w\-+.=]+@[-A-Z0-9.]*[A-Z0-9])
+                        # Pattern 11 to 13: Optional parameters
+                        ((\?)([^\s"<]*[\w+#?\/&=]))?
+                        # Pattern 14: Optional closing bracket
+                        (>)?
+                    /ix
+            EOR;
 
-        return array('regexp_callback' => array(
-            $this->_regexp => array($this, 'regexCallback')
-        ));
+        return ['regexp_callback' => [
+            $this->_regexp => [$this, 'regexCallback'],
+        ]];
     }
 
     /**
@@ -95,9 +96,9 @@ EOR;
             $data = "\01\01\01" . base64_encode($secret->write($this->_params['secretKey'], $data)) . "\01\01\01";
         }
 
-        return $matches[1] . $matches[2] . (isset($matches[9]) ? $matches[9] : '') .
-            $data .
-            $matches[4] . $matches[8] . (isset($matches[14]) ? $matches[14] : '');
+        return $matches[1] . $matches[2] . ($matches[9] ?? '')
+            . $data
+            . $matches[4] . $matches[8] . ($matches[14] ?? '');
     }
 
     /**
@@ -115,7 +116,7 @@ EOR;
             : ' class="' . $this->_params['class'] . '"';
         $email = (!isset($matches[10]) || $matches[10] === '')
             ? $matches[3] . $matches[5]
-            : $matches[10] . (isset($matches[11]) ? $matches[11] : '');
+            : $matches[10] . ($matches[11] ?? '');
 
         return '<a' . $class . ' href="mailto:' . htmlspecialchars($email) . '">' . htmlspecialchars($email) . '</a>';
     }
@@ -138,10 +139,11 @@ EOR;
         }
         return preg_replace_callback(
             '/\01\01\01([\w=+\/]*)\01\01\01/',
-            function($hex) use ($secret, $key) {
+            function ($hex) use ($secret, $key) {
                 return  $secret->read($key, base64_decode($hex[1]));
             },
-            $text);
+            $text
+        );
     }
 
 }

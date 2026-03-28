@@ -1,10 +1,11 @@
 <?php
+
 /**
  * The Horde_Text_Filter_Tabs2spaces:: converts tabs into spaces.
  *
  * TODO: parameters (breakchar, tabstop)
  *
- * Copyright 2004-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2004-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (LGPL). If you
  * did not receive this file, see http://www.horde.org/licenses/lgpl21.
@@ -21,10 +22,10 @@ class Horde_Text_Filter_Tabs2spaces extends Horde_Text_Filter_Base
      *
      * @var array
      */
-    protected $_params = array(
+    protected $_params = [
         'breakchar' => "\n",
-        'tabstop' => 8
-    );
+        'tabstop' => 8,
+    ];
 
     /**
      * Executes any code necessary before applying the filter patterns.

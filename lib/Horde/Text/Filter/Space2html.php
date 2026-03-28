@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The space2html filter converts horizontal whitespace to HTML code.
  *
@@ -9,7 +10,7 @@
  * encode_all -- Replace all spaces with &nbsp;?  Defaults to false.
  * </pre>
  *
- * Copyright 2001-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2001-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (LGPL). If you
  * did not receive this file, see http://www.horde.org/licenses/lgpl21.
@@ -27,11 +28,11 @@ class Horde_Text_Filter_Space2html extends Horde_Text_Filter_Base
      *
      * @var array
      */
-    protected $_params = array(
+    protected $_params = [
         'charset' => 'ISO-8859-1',
         'encode' => false,
-        'encode_all' => false
-    );
+        'encode_all' => false,
+    ];
 
     /**
      * Executes any code necessary before applying the filter patterns.
@@ -55,12 +56,12 @@ class Horde_Text_Filter_Space2html extends Horde_Text_Filter_Base
      */
     public function getPatterns()
     {
-        return array(
-            'replace' => array(
+        return [
+            'replace' => [
                 "\t" => '&nbsp; &nbsp; &nbsp; &nbsp; ',
-                '  ' => '&nbsp; '
-            )
-        );
+                '  ' => '&nbsp; ',
+            ],
+        ];
     }
 
     /**

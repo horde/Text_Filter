@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The Horde_Text_Filter_Bbcode:: class finds bbcode-style markup (see below)
  * in a block of text and turns it into HTML.
@@ -47,7 +48,7 @@
  *         and the text is "Mail to Carlos".
  * </pre>
  *
- * Copyright 2003-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2003-2026 Horde LLC (http://www.horde.org/)
  *
  * Email validation based on Chuck Hagenbuch's
  * Mail_RFC822::isValidInetAddress().
@@ -67,9 +68,9 @@ class Horde_Text_Filter_Bbcode extends Horde_Text_Filter_Base
      *
      * @var array
      */
-    protected $_params = array(
-        'entities' => false
-    );
+    protected $_params = [
+        'entities' => false,
+    ];
 
     /**
      * Executes any code necessary before applying the filter patterns.
@@ -94,7 +95,7 @@ class Horde_Text_Filter_Bbcode extends Horde_Text_Filter_Base
      */
     public function getPatterns()
     {
-        $replace = array(
+        $replace = [
             '[i]' => '<em>', '[/i]' => '</em>',
             '[u]' => '<u>', '[/u]' => '</u>',
             '[b]' => '<strong>', '[/b]' => '</strong>',
@@ -105,15 +106,15 @@ class Horde_Text_Filter_Bbcode extends Horde_Text_Filter_Base
             '[quote]' => '<blockquote>', '[/quote]' => '</blockquote>',
             '[list]' => '<ul>', '[/list]' => '</ul>',
             '[numlist]' => '<ol>', '[/numlist]' => '</ol>',
-            '[*]' => '<li>'
-        );
+            '[*]' => '<li>',
+        ];
 
         /* When checking URLs we validate part of them, but it is up
          * to the user to write them correctly (in particular the
          * query string). Concerning mails we use the regular
          * expression in Mail_RFC822's isValidInetAddress() function,
          * slightly modified. */
-        $regexp = array(
+        $regexp = [
             "#\[url\]((http|https)://([a-zA-Z\d][\w-]*)(\.[a-zA-Z\d][\w-]*)+(:(\d+))?(/([^<>]+))*)\[/url\]#U" => $this->_link("$1", "$1") . "$1</a>",
 
             "#\[url\=((http|https)://([a-zA-Z\d][\w-]*)(\.[a-zA-Z\d][\w-]*)+(:(\d+))?(/([^<>]+))*)\]([^<>]+)\[/url\]#U" => $this->_link("$1", "$1") . "$9</a>",
@@ -130,13 +131,13 @@ class Horde_Text_Filter_Bbcode extends Horde_Text_Filter_Base
 
             "#\[img\=(.*)\](.*)\[/img\]#U" => "<img src=\"$1\" alt=\"$2\" title=\"$2\" />",
 
-            "#\[color\=(.*)\](.*)\[/color\]#U" => "<span style=\"color: $1;\">$2</span>"
-        );
+            "#\[color\=(.*)\](.*)\[/color\]#U" => "<span style=\"color: $1;\">$2</span>",
+        ];
 
-        return array(
+        return [
             'regexp' => $regexp,
-            'replace' => $replace
-        );
+            'replace' => $replace,
+        ];
     }
 
     /**

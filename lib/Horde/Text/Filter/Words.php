@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Copyright 2004-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2004-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (LGPL). If you
  * did not receive this file, see http://www.horde.org/licenses/lgpl21.
@@ -32,9 +33,9 @@ class Horde_Text_Filter_Words extends Horde_Text_Filter_Base
      *
      * @var array
      */
-    protected $_params = array(
-        'replacement' => '*****'
-    );
+    protected $_params = [
+        'replacement' => '*****',
+    ];
 
     /**
      * Returns a hash with replace patterns.
@@ -43,10 +44,10 @@ class Horde_Text_Filter_Words extends Horde_Text_Filter_Base
      */
     public function getPatterns()
     {
-        $regexp = $words = array();
+        $regexp = $words = [];
 
-        if (isset($this->_params['words_file']) &&
-            is_readable($this->_params['words_file'])) {
+        if (isset($this->_params['words_file'])
+            && is_readable($this->_params['words_file'])) {
             /* Read the file and iterate through the lines. */
             $lines = file($this->_params['words_file']);
             foreach ($lines as $line) {
@@ -68,7 +69,7 @@ class Horde_Text_Filter_Words extends Horde_Text_Filter_Base
             }
         }
 
-        return array('regexp' => $regexp);
+        return ['regexp' => $regexp];
     }
 
     /**
@@ -80,7 +81,7 @@ class Horde_Text_Filter_Words extends Horde_Text_Filter_Base
     {
         return $this->_params['replacement']
             ? $this->_params['replacement']
-            :substr($line, 0, 1) . str_repeat('*', strlen($line) - 1);
+            : substr($line, 0, 1) . str_repeat('*', strlen($line) - 1);
     }
 
 }

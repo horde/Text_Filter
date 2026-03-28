@@ -1,9 +1,10 @@
 <?php
+
 /**
  * This filter cleans up javascript output by running it through an
  * optimizer/compressor.
  *
- * Copyright 2009-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2009-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (LGPL). If you
  * did not receive this file, see http://www.horde.org/licenses/lgpl21.
@@ -21,11 +22,11 @@ class Horde_Text_Filter_JavascriptMinify extends Horde_Text_Filter_Base
      *
      * @var array
      */
-    protected $_params = array(
+    protected $_params = [
         'closure' => null,
         'java' => null,
-        'yui' => null
-    );
+        'yui' => null,
+    ];
 
     /**
      * Executes any code necessary after applying the filter patterns.
@@ -53,7 +54,8 @@ class Horde_Text_Filter_JavascriptMinify extends Horde_Text_Filter_Base
             $jsmin = new Horde_Text_Filter_Jsmin($text);
             try {
                 return $jsmin->minify();
-            } catch (Exception $e) {}
+            } catch (Exception $e) {
+            }
         }
 
         return $text;
@@ -70,16 +72,16 @@ class Horde_Text_Filter_JavascriptMinify extends Horde_Text_Filter_Base
      */
     protected function _runCompressor($text, $jar, $args = '')
     {
-        if (!is_executable($this->_params['java']) ||
-            !file_exists($jar)) {
+        if (!is_executable($this->_params['java'])
+            || !file_exists($jar)) {
             return $text;
         }
 
-        $descspec = array(
-            0 => array('pipe', 'r'),
-            1 => array('pipe', 'w'),
-            2 => array('pipe', 'w')
-        );
+        $descspec = [
+            0 => ['pipe', 'r'],
+            1 => ['pipe', 'w'],
+            2 => ['pipe', 'w'],
+        ];
 
         $process = proc_open(escapeshellcmd($this->_params['java']) . ' -jar ' . escapeshellarg($jar) . $args, $descspec, $pipes);
 

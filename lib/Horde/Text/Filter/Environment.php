@@ -1,10 +1,11 @@
 <?php
+
 /**
  * Replaces occurences of %VAR% with VAR, if VAR exists in the webserver's
  * environment.  Ignores all text after a '#' character (shell-style
  * comments).
  *
- * Copyright 2004-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2004-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (LGPL). If you
  * did not receive this file, see http://www.horde.org/licenses/lgpl21.
@@ -23,19 +24,19 @@ class Horde_Text_Filter_Environment extends Horde_Text_Filter_Base
      */
     public function getPatterns()
     {
-        $regexp = array(
+        $regexp = [
             '/^#.*$\n/m' => '',
-            '/^([^#]*)#.*$/m' => '$1'
-        );
+            '/^([^#]*)#.*$/m' => '$1',
+        ];
 
-        $regexp_callback = array(
-            '/%([A-Za-z_]+)%/' => array($this, 'regexCallback')
-        );
+        $regexp_callback = [
+            '/%([A-Za-z_]+)%/' => [$this, 'regexCallback'],
+        ];
 
-        return array(
+        return [
             'regexp' => $regexp,
-            'regexp_callback' => $regexp_callback
-        );
+            'regexp_callback' => $regexp_callback,
+        ];
     }
 
     /**

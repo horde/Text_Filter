@@ -1,8 +1,9 @@
 <?php
+
 /**
  * Horde_Text_Filter_Base:: is the parent class for defining a text filter.
  *
- * Copyright 1999-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 1999-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (LGPL). If you
  * did not receive this file, see http://www.horde.org/licenses/lgpl21.
@@ -21,14 +22,14 @@ class Horde_Text_Filter_Base
      *
      * @var array
      */
-    protected $_params = array();
+    protected $_params = [];
 
     /**
      * Constructor.
      *
      * @param array $params  Any parameters that the filter instance needs.
      */
-    public function __construct($params = array())
+    public function __construct($params = [])
     {
         $this->_params = array_merge($this->_params, $params);
     }
@@ -52,7 +53,7 @@ class Horde_Text_Filter_Base
      */
     public function getPatterns()
     {
-        return array();
+        return [];
     }
 
     /**

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Removes some common entities and high-ascii or otherwise nonstandard
  * characters common in text pasted from Microsoft Word into a browser.
@@ -8,7 +9,7 @@
  * US-ASCII (7-bit) text which you suspect (or know) may have invalid or
  * non-printing characters in it.
  *
- * Copyright 2004-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2004-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (LGPL). If you
  * did not receive this file, see http://www.horde.org/licenses/lgpl21.
@@ -48,11 +49,11 @@ class Horde_Text_Filter_Cleanascii extends Horde_Text_Filter_Base
     public function getPatterns()
     {
         /* Remove control characters. */
-        $regexp = array('/[\x00-\x1f]+/' => '');
+        $regexp = ['/[\x00-\x1f]+/' => ''];
 
         /* The '’' entry may look wrong, depending on your editor,
          * but it's not - that's not really a single quote. */
-        $replace = array(
+        $replace = [
             chr(150) => '-',
             chr(167) => '*',
             '·' => '*',
@@ -75,9 +76,9 @@ class Horde_Text_Filter_Cleanascii extends Horde_Text_Filter_Base
             '&#61558;' => '*',
             '&#8226;' => '*',
             '&#9658;' => '>',
-        );
+        ];
 
-        return array('regexp' => $regexp, 'replace' => $replace);
+        return ['regexp' => $regexp, 'replace' => $replace];
     }
 
 }

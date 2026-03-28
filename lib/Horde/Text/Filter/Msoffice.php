@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2004-2026 Horde LLC (http://www.horde.org/)
  *
@@ -28,9 +29,9 @@ class Horde_Text_Filter_Msoffice extends Horde_Text_Filter_Base
      *
      * @var array
      */
-    protected $_params = array(
+    protected $_params = [
         'charset' => 'UTF-8',
-    );
+    ];
 
     /**
      * Executes any code necessary after applying the filter patterns.
@@ -54,13 +55,13 @@ class Horde_Text_Filter_Msoffice extends Horde_Text_Filter_Base
         // Replace all <p> elements of class "MsoNormal" with <br> elements,
         // unless they contain other classes. Then replace with <div> elements.
         foreach ($dom as $child) {
-            if ($child instanceof DOMElement &&
-                HordeString::lower($child->tagName) == 'p') {
+            if ($child instanceof DOMElement
+                && HordeString::lower($child->tagName) == 'p') {
             }
-            if (!($child instanceof DOMElement) ||
-                HordeString::lower($child->tagName) != 'p' ||
-                !($css = $child->getAttribute('class')) ||
-                strpos($css, 'MsoNormal') === false) {
+            if (!($child instanceof DOMElement)
+                || HordeString::lower($child->tagName) != 'p'
+                || !($css = $child->getAttribute('class'))
+                || strpos($css, 'MsoNormal') === false) {
                 continue;
             }
             $css = trim(str_replace('MsoNormal', '', $css));
@@ -77,12 +78,13 @@ class Horde_Text_Filter_Msoffice extends Horde_Text_Filter_Base
                     $child->parentNode->insertBefore($tomove, $child);
                 }
                 $child->parentNode->insertBefore(
-                    $dom->dom->createElement('br'), $child
+                    $dom->dom->createElement('br'),
+                    $child
                 );
             }
             $child->parentNode->removeChild($child);
         }
 
-        return $dom->returnHtml(array('charset' => $this->_params['charset']));
+        return $dom->returnHtml(['charset' => $this->_params['charset']]);
     }
 }

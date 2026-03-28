@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2009-2026 Horde LLC (http://www.horde.org/)
  *
@@ -37,11 +38,11 @@ class Horde_Text_Filter_Cleanhtml extends Horde_Text_Filter_Base
      *
      * @var array
      */
-    protected $_params = array(
+    protected $_params = [
         'body_only' => false,
         'charset' => 'UTF-8',
-        'size' => false
-    );
+        'size' => false,
+    ];
 
     /**
      * Executes any code necessary after applying the filter patterns.
@@ -52,13 +53,13 @@ class Horde_Text_Filter_Cleanhtml extends Horde_Text_Filter_Base
      */
     public function postProcess($text)
     {
-        if (!Util::extensionExists('tidy') ||
-            (($this->_params['size'] !== false) &&
-             (strlen($text) > $this->_params['size']))) {
+        if (!Util::extensionExists('tidy')
+            || (($this->_params['size'] !== false)
+             && (strlen($text) > $this->_params['size']))) {
             return $text;
         }
 
-        $tidy_config = array(
+        $tidy_config = [
             'enclose-block-text' => true,
             'hide-comments' => true,
             'indent' => false,
@@ -66,8 +67,8 @@ class Horde_Text_Filter_Cleanhtml extends Horde_Text_Filter_Base
             'preserve-entities' => true,
             'show-body-only' => !empty($this->_params['body_only']),
             'tab-size' => 0,
-            'wrap' => 0
-        );
+            'wrap' => 0,
+        ];
 
         $tidy = new tidy();
 

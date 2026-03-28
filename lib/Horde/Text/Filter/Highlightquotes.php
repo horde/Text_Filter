@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Highlights quoted messages with different colors for the different quoting
  * levels.
@@ -39,11 +40,11 @@ class Horde_Text_Filter_Highlightquotes extends Horde_Text_Filter_Base
      *
      * @var array
      */
-    protected $_params = array(
+    protected $_params = [
         'citeblock' => true,
         'cssLevels' => 5,
-        'hideBlocks' => false
-    );
+        'hideBlocks' => false,
+    ];
 
     /**
      * The number of quoted lines to exceed to trigger large block
@@ -78,8 +79,8 @@ class Horde_Text_Filter_Highlightquotes extends Horde_Text_Filter_Base
         /* Remove extra spaces before quoted text as the CSS formatting will
          * automatically add a bit of space for us. */
         return ($this->_params['citeblock'])
-            ? array('regexp' => array("/<br \/>\s*\n\s*<br \/>\s*\n\s*((&gt;\s?)+)/m" => "<br />\n\\1"))
-            : array();
+            ? ['regexp' => ["/<br \/>\s*\n\s*<br \/>\s*\n\s*((&gt;\s?)+)/m" => "<br />\n\\1"]]
+            : [];
     }
 
     /**
@@ -99,15 +100,15 @@ class Horde_Text_Filter_Highlightquotes extends Horde_Text_Filter_Base
 
         /* Other loop variables. */
         $text_out = '';
-        $lines = array();
-        $tmp = array('level' => 0, 'lines' => array());
+        $lines = [];
+        $tmp = ['level' => 0, 'lines' => []];
         $qcount = 0;
 
         /* Parse text line by line. */
         foreach (explode("\n", $text) as $line) {
             /* Cite level of current line. */
             $clevel = 0;
-            $matches = array();
+            $matches = [];
 
             /* Do we have a citation line? */
             if (preg_match('/^\s*((&gt;\s?)+)/m', $line, $matches)) {
@@ -125,15 +126,15 @@ class Horde_Text_Filter_Highlightquotes extends Horde_Text_Filter_Base
                 $lines[] = $tmp;
                 if ($clevel == 0) {
                     $text_out .= $this->_process($lines, $qcount);
-                    $lines = array();
+                    $lines = [];
                     $qcount = 0;
                 }
-                $tmp = array('level' => $clevel, 'lines' => array());
+                $tmp = ['level' => $clevel, 'lines' => []];
 
-            /* Is this cite level higher than the current level? */
+                /* Is this cite level higher than the current level? */
             } elseif ($clevel > $qlevel) {
                 $lines[] = $tmp;
-                $tmp = array('level' => $clevel, 'lines' => array());
+                $tmp = ['level' => $clevel, 'lines' => []];
             }
 
             $tmp['lines'][] = $line;
@@ -180,10 +181,10 @@ class Horde_Text_Filter_Highlightquotes extends Horde_Text_Filter_Base
             } else {
                 for ($i = $level; $i < $curr['level']; ++$i) {
                     /* Add quote block start tags for each cite level. */
-                    $out .= ($this->_params['citeblock'] ? '<div class="citation ' : '<font class="') .
-                        'quoted' . (($i % $this->_params['cssLevels']) + 1) . '"' .
-                        ((($i == 0) && ($qcount > $this->_qlimit) && $this->_params['hideBlocks']) ? ' style="display:none"' : '') .
-                        '>';
+                    $out .= ($this->_params['citeblock'] ? '<div class="citation ' : '<font class="')
+                        . 'quoted' . (($i % $this->_params['cssLevels']) + 1) . '"'
+                        . ((($i == 0) && ($qcount > $this->_qlimit) && $this->_params['hideBlocks']) ? ' style="display:none"' : '')
+                        . '>';
                 }
             }
 

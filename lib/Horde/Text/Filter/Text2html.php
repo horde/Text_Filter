@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Turn text into HTML with varying levels of parsing.  For no html
  * whatsoever, use htmlspecialchars() instead.
@@ -19,19 +20,19 @@ use Horde\Util\HordeString;
 
 class Horde_Text_Filter_Text2html extends Horde_Text_Filter_Base
 {
-    const PASSTHRU = 0;
-    const SYNTAX = 1;
-    const MICRO = 2;
-    const MICRO_LINKURL = 3;
-    const NOHTML = 4;
-    const NOHTML_NOBREAK = 5;
+    public const PASSTHRU = 0;
+    public const SYNTAX = 1;
+    public const MICRO = 2;
+    public const MICRO_LINKURL = 3;
+    public const NOHTML = 4;
+    public const NOHTML_NOBREAK = 5;
 
     /**
      * Filter parameters.
      *
      * @var array
      */
-    protected $_params = array(
+    protected $_params = [
         'charset' => 'ISO-8859-1',
         'class' => 'fixed',
         'emails' => false,
@@ -40,8 +41,8 @@ class Horde_Text_Filter_Text2html extends Horde_Text_Filter_Base
         'text2html' => false,
         'parselevel' => 0,
         'space2html' => false,
-        'secretKey' => null
-    );
+        'secretKey' => null,
+    ];
 
     /**
      * Constructor.
@@ -72,7 +73,7 @@ class Horde_Text_Filter_Text2html extends Horde_Text_Filter_Base
      *  <li>space2html: (array) TODO</li>
      * </ul>
      */
-    public function __construct($params = array())
+    public function __construct($params = [])
     {
         parent::__construct($params);
 
@@ -140,16 +141,16 @@ class Horde_Text_Filter_Text2html extends Horde_Text_Filter_Base
         }
 
         if ($this->_params['parselevel'] < self::NOHTML) {
-            $filters = array();
+            $filters = [];
             if ($this->_params['linkurls']) {
                 reset($this->_params['linkurls']);
                 $this->_params['linkurls'][key($this->_params['linkurls'])]['encode'] = true;
                 $filters = $this->_params['linkurls'];
             } else {
-                $filters['linkurls'] = array(
+                $filters['linkurls'] = [
                     'encode' => true,
-                    'secretKey' => $this->_params['secretKey']
-                );
+                    'secretKey' => $this->_params['secretKey'],
+                ];
             }
 
             if ($this->_params['parselevel'] < self::MICRO_LINKURL) {
@@ -158,10 +159,10 @@ class Horde_Text_Filter_Text2html extends Horde_Text_Filter_Base
                     $this->_params['emails'][key($this->_params['emails'])]['encode'] = true;
                     $filters += $this->_params['emails'];
                 } else {
-                    $filters['emails'] = array(
+                    $filters['emails'] = [
                         'encode' => true,
-                        'secretKey' => $this->_params['secretKey']
-                    );
+                        'secretKey' => $this->_params['secretKey'],
+                    ];
                 }
             }
 
@@ -188,7 +189,7 @@ class Horde_Text_Filter_Text2html extends Horde_Text_Filter_Base
             );
 
             if (!strlen($text2)) {
-                foreach (array('windows-1252', 'utf-8') as $val) {
+                foreach (['windows-1252', 'utf-8'] as $val) {
                     $text2 = HordeString::convertCharset(
                         @htmlspecialchars($text, ENT_COMPAT, $val),
                         $val,
@@ -216,7 +217,7 @@ class Horde_Text_Filter_Text2html extends Horde_Text_Filter_Base
                 $driver = key($this->_params['space2html']);
             } else {
                 $driver = 'space2html';
-                $params = array();
+                $params = [];
             }
 
             $text = Horde_Text_Filter::filter($text, $driver, $params);

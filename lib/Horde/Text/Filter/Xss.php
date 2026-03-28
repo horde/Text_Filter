@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2004-2026 Horde LLC (http://www.horde.org/)
  *
@@ -52,14 +53,14 @@ class Horde_Text_Filter_Xss extends Horde_Text_Filter_Base
      *
      * @var array
      */
-    protected $_params = array(
+    protected $_params = [
         'charset' => 'UTF-8',
         'noprefetch' => false,
         'return_document' => false,
         'return_dom' => false,
         'strip_styles' => true,
-        'strip_style_attributes' => true
-    );
+        'strip_style_attributes' => true,
+    ];
 
     /**
      * Executes any code necessary after applying the filter patterns.
@@ -107,79 +108,79 @@ class Horde_Text_Filter_Xss extends Horde_Text_Filter_Base
     {
         if ($node instanceof DOMElement) {
             $remove = $this->_params['strip_style_attributes']
-                ? array('style')
-                : array();
+                ? ['style']
+                : [];
 
             switch (HordeString::lower($node->tagName)) {
-            case 'a':
-            case 'form':
-                /* Strip out data URLs living in link-like elements
-                 * (Bug #8715). */
-                if (HordeString::lower($node->tagName) == 'form') {
-                    $attributes = array('action');
-                } else {
-                    $attributes = array('href', 'xlink:href');
-                }
-                foreach ($attributes as $attribute) {
-                    if ($node->hasAttribute($attribute) &&
-                        preg_match("/\s*data:/i", $node->getAttribute($attribute))) {
-                        $remove[] = $attribute;
+                case 'a':
+                case 'form':
+                    /* Strip out data URLs living in link-like elements
+                     * (Bug #8715). */
+                    if (HordeString::lower($node->tagName) == 'form') {
+                        $attributes = ['action'];
+                    } else {
+                        $attributes = ['href', 'xlink:href'];
                     }
-                }
-                break;
+                    foreach ($attributes as $attribute) {
+                        if ($node->hasAttribute($attribute)
+                            && preg_match("/\s*data:/i", $node->getAttribute($attribute))) {
+                            $remove[] = $attribute;
+                        }
+                    }
+                    break;
 
-            case 'applet':
-            case 'audio':
-            case 'bgsound':
-            case 'embed':
-            case 'iframe':
-            case 'import':
-            case 'java':
-            case 'layer':
-            case 'meta':
-            case 'object':
-            case 'script':
-            case 'video':
-            case 'xml':
-                /* Remove all tags that might cause trouble. */
-                $node->parentNode->removeChild($node);
-                break;
-
-            case 'base':
-            case 'link':
-            case 'style':
-                /* We primarily strip out <base> tags due to styling
-                 * concerns. There is a security issue with HREF tags,
-                 * but the 'javascript' search/replace code
-                 * sufficiently filters these strings. */
-                if ($this->_params['strip_styles']) {
+                case 'applet':
+                case 'audio':
+                case 'bgsound':
+                case 'embed':
+                case 'iframe':
+                case 'import':
+                case 'java':
+                case 'layer':
+                case 'meta':
+                case 'object':
+                case 'script':
+                case 'video':
+                case 'xml':
+                    /* Remove all tags that might cause trouble. */
                     $node->parentNode->removeChild($node);
-                }
-                break;
+                    break;
 
-            case 'html':
-                if ($node->hasAttribute('manifest')) {
-                    $remove[] = 'manifest';
-                }
-                break;
+                case 'base':
+                case 'link':
+                case 'style':
+                    /* We primarily strip out <base> tags due to styling
+                     * concerns. There is a security issue with HREF tags,
+                     * but the 'javascript' search/replace code
+                     * sufficiently filters these strings. */
+                    if ($this->_params['strip_styles']) {
+                        $node->parentNode->removeChild($node);
+                    }
+                    break;
 
-            case 'set':
-                /* I believe this attack only works on old browsers.
-                 * But makes no sense allowing HTML to try to set
-                 * innerHTML anyway. */
-                if ($node->hasAttribute('attributename') &&
-                    (strcasecmp($node->getAttribute('attributename'), 'innerHTML') === 0)) {
-                    $node->parentNode->removeChild($node);
-                }
-                break;
+                case 'html':
+                    if ($node->hasAttribute('manifest')) {
+                        $remove[] = 'manifest';
+                    }
+                    break;
+
+                case 'set':
+                    /* I believe this attack only works on old browsers.
+                     * But makes no sense allowing HTML to try to set
+                     * innerHTML anyway. */
+                    if ($node->hasAttribute('attributename')
+                        && (strcasecmp($node->getAttribute('attributename'), 'innerHTML') === 0)) {
+                        $node->parentNode->removeChild($node);
+                    }
+                    break;
             }
 
             foreach ($node->attributes as $val) {
                 /* Never allow on<foo>="bar()",
                  * attribute="[mocha|*script]:foo()", or
                  * attribute="&{...}". */
-                if ((stripos(ltrim($val->name), 'on') === 0) ||
-                    preg_match("/^\s*(?:mocha:|[^:]+script:|&{)/i", $val->value)) {
+                if ((stripos(ltrim($val->name), 'on') === 0)
+                    || preg_match("/^\s*(?:mocha:|[^:]+script:|&{)/i", $val->value)) {
                     $remove[] = $val->name;
                 }
             }
