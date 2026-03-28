@@ -9,14 +9,14 @@
  * @subpackage UnitTests
  */
 namespace Horde\Text\Filter;
+
 use PHPUnit\Framework\TestCase;
-use \Horde_Text_Filter;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Horde_Text_Filter;
 
 class EmailsTest extends TestCase
 {
-    /**
-     * @dataProvider emailsProvider
-     */
+    #[DataProvider('emailsProvider')]
     public function testEmails($input, $expected)
     {
         $this->assertEquals(
@@ -27,7 +27,7 @@ class EmailsTest extends TestCase
         );
     }
 
-    public function emailsProvider()
+    public static function emailsProvider()
     {
         return array(
             array(

@@ -12,8 +12,10 @@
  * @subpackage UnitTests
  */
 namespace Horde\Text\Filter;
+
 use PHPUnit\Framework\TestCase;
-use \Horde_Text_Filter;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Horde_Text_Filter;
 
 /**
  * Tests for the simple markup filter.
@@ -27,9 +29,7 @@ use \Horde_Text_Filter;
  */
 class SimplemarkupTest extends TestCase
 {
-    /**
-     * @dataProvider markupExamples
-     */
+    #[DataProvider('markupExamples')]
     public function testSimplemarkup($markup, $output, $html)
     {
         $this->assertEquals(
@@ -38,7 +38,7 @@ class SimplemarkupTest extends TestCase
         );
     }
 
-    public function markupExamples()
+    public static function markupExamples()
     {
         return array(
             // Simple examples.

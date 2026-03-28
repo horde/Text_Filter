@@ -9,15 +9,15 @@
  * @subpackage UnitTests
  */
 namespace Horde\Text\Filter;
+
 use PHPUnit\Framework\TestCase;
-use \Horde_Text_Filter;
-use \Horde_Text_Filter_Text2html;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Horde_Text_Filter;
+use Horde_Text_Filter_Text2html;
 
 class Text2htmlTest extends TestCase
 {
-    /**
-     * @dataProvider text2htmlProvider
-     */
+    #[DataProvider('text2htmlProvider')]
     public function testText2html($input, $level, $expected)
     {
         $this->assertEquals(
@@ -30,7 +30,7 @@ class Text2htmlTest extends TestCase
         );
     }
 
-    public function text2htmlProvider()
+    public static function text2htmlProvider()
     {
         $tests = array(
             'http://www.horde.org/foo/',

@@ -9,14 +9,14 @@
  * @subpackage UnitTests
  */
 namespace Horde\Text\Filter;
+
 use PHPUnit\Framework\TestCase;
-use \Horde_Text_Filter;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Horde_Text_Filter;
 
 class Html2textTest extends TestCase
 {
-    /**
-     * @dataProvider html2textProvider
-     */
+    #[DataProvider('html2textProvider')]
     public function testHtml2text($input, $expected)
     {
         $this->markTestSkipped("Generated String doesn't match input. ");
@@ -27,7 +27,7 @@ class Html2textTest extends TestCase
         $this->assertEquals($expected, $filter);
     }
 
-    public function html2textProvider()
+    public static function html2textProvider()
     {
         $data = array(
             array(

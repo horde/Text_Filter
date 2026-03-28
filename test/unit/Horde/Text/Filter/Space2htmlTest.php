@@ -9,14 +9,14 @@
  * @subpackage UnitTests
  */
 namespace Horde\Text\Filter;
+
 use PHPUnit\Framework\TestCase;
-use \Horde_Text_Filter;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Horde_Text_Filter;
 
 class Space2htmlTest extends TestCase
 {
-    /**
-     * @dataProvider space2htmlProvider
-     */
+    #[DataProvider('space2htmlProvider')]
     public function testSpace2html($spaces, $results, $results_encode_all)
     {
         $this->assertEquals(
@@ -34,7 +34,7 @@ class Space2htmlTest extends TestCase
         );
     }
 
-    public function space2htmlProvider()
+    public static function space2htmlProvider()
     {
         return array(
             array(

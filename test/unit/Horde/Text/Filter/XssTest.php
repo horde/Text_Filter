@@ -9,17 +9,18 @@
  * @subpackage UnitTests
  */
 namespace Horde\Text\Filter;
+
 use PHPUnit\Framework\TestCase;
-use \Horde_Text_Filter;
-use \Horde_String;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Horde_Text_Filter;
+use Horde_String;
 
 class XssTest extends TestCase
 {
     /**
      * Test cases from http://ha.ckers.org/xss.html
-     *
-     * @dataProvider xssProvider
      */
+    #[DataProvider('xssProvider')]
     public function testXss($key, $val)
     {
         $this->assertEquals(
@@ -28,7 +29,7 @@ class XssTest extends TestCase
         );
     }
 
-    public function xssProvider()
+    public static function xssProvider()
     {
         $framedata = <<<EOT
 <frameset rows="15,15,15,15,15,15,15,15,15,*">

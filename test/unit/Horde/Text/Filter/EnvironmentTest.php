@@ -9,8 +9,10 @@
  * @subpackage UnitTests
  */
 namespace Horde\Text\Filter;
+
 use PHPUnit\Framework\TestCase;
-use \Horde_Text_Filter;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Horde_Text_Filter;
 
 class EnvironmentTest extends TestCase
 {
@@ -20,9 +22,7 @@ class EnvironmentTest extends TestCase
         putenv('FOO=bar');
     }
 
-    /**
-     * @dataProvider environmentProvider
-     */
+    #[DataProvider('environmentProvider')]
     public function testEnvironment($input, $expected)
     {
         $this->assertEquals(
@@ -31,7 +31,7 @@ class EnvironmentTest extends TestCase
         );
     }
 
-    public function environmentProvider()
+    public static function environmentProvider()
     {
         return array(
             array('Simple line', 'Simple line'),

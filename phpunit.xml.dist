@@ -1,13 +1,36 @@
-<phpunit bootstrap="test/Horde/Text/Filter/bootstrap.php"
-colors="true">
-  <filter>
-    <whitelist>
-      <directory suffix=".php">lib</directory>
-    </whitelist>
-  </filter>
-  <testsuites>
-    <testsuite>
-      <directory>test</directory>
-    </testsuite>
-  </testsuites>
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/11.0/phpunit.xsd"
+         bootstrap="vendor/autoload.php"
+         cacheDirectory=".phpunit.cache"
+         executionOrder="depends,defects"
+         requireCoverageMetadata="false"
+         beStrictAboutCoverageMetadata="true"
+         beStrictAboutOutputDuringTests="true"
+         failOnRisky="true"
+         failOnWarning="true">
+
+    <testsuites>
+        <!-- Default suite: pure unit tests only -->
+        <testsuite name="unit">
+            <directory>test/unit</directory>
+        </testsuite>
+
+        <!-- Integration tests: multiple components, no external services -->
+        <testsuite name="integration">
+            <directory>test/integration</directory>
+        </testsuite>
+
+        <!-- Live backend tests: require external services -->
+        <testsuite name="live">
+            <directory>test/live</directory>
+        </testsuite>
+    </testsuites>
+
+    <source>
+        <include>
+            <directory>lib</directory>
+            <directory>src</directory>
+        </include>
+    </source>
 </phpunit>

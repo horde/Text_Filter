@@ -9,14 +9,14 @@
  * @subpackage UnitTests
  */
 namespace Horde\Text\Filter;
-use Horde_Test_Case as TestCase;
-use \Horde_Text_Filter;
+
+use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Horde_Text_Filter;
 
 class LinkurlsTest extends TestCase
 {
-    /**
-     * @dataProvider urlProvider
-     */
+    #[DataProvider('urlProvider')]
     public function testLinkurls($testText, $expected)
     {
         // need to update regexp per http://daringfireball.net/2010/07/improved_regex_for_matching_urls to fully pass
@@ -28,7 +28,7 @@ class LinkurlsTest extends TestCase
      * Test data from
      * http://daringfireball.net/misc/2010/07/url-matching-regex-test-data.text
      */
-    public function urlProvider()
+    public static function urlProvider()
     {
         return array(
             /* No match */
