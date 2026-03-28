@@ -1,0 +1,113 @@
+<?php
+
+declare(strict_types=1);
+
+/**
+ * Copyright 1999-2026 Horde LLC (http://www.horde.org/)
+ *
+ * See the enclosed file LICENSE for license information (LGPL). If you
+ * did not receive this file, see http://www.horde.org/licenses/lgpl21.
+ */
+
+namespace Horde\Text\Filter;
+
+use Horde\Text\Filter\Filter\Base;
+use Horde\Util\HordeString;
+
+/**
+ * Parent class for defining stackable text filters.
+ *
+ * @author   Chuck Hagenbuch <chuck@horde.org>
+ * @author   Jan Schneider <jan@horde.org>
+ * @category Horde
+ * @license  http://www.horde.org/licenses/lgpl21 LGPL 2.1
+ * @package  Text_Filter
+ */
+class TextFilter
+{
+    /**
+     * Attempts to return a concrete instance based on $driver.
+     *
+     * @param string $driver  Either a driver name, or the full class name to
+     *                        use (class must extend Base).
+     * @param array $params   A hash containing any additional configuration
+     *                        parameters a subclass might need.
+     *
+     * @return Base  The newly created concrete instance.
+     * @throws Exception
+     */
+    public static function factory(string $driver, array $params = []): Base
+    {
+        /* Base drivers (in Filter/ directory). */
+        $class = __NAMESPACE__ . '\\Filter\\' . HordeString::ucfirst(basename($driver));
+        if (class_exists($class)) {
+            return new $class($params);
+        }
+
+        /* Explicit class name. */
+        $class = $driver;
+        if (class_exists($class)) {
+            return new $class($params);
+        }
+
+        throw new Exception(__CLASS__ . ': Class definition of ' . $driver . ' not found.');
+    }
+
+    /**
+     * Applies a set of patterns to a block of text.
+     *
+     * @param string $text    The text to filter.
+     * @param array|string $filters  The list of filters (or a single filter).
+     * @param array $params   The list of params to use with each filter.
+     *
+     * @return string  The transformed text.
+     * @throws Exception
+     */
+    public static function filter(string $text, array|string $filters = [], array $params = []): string
+    {
+        if (!is_array($filters)) {
+            $filters = [$filters];
+            $params = [$params];
+        }
+
+        $params = array_values($params);
+
+        foreach (array_values($filters) as $num => $filter) {
+            $filterOb = self::factory($filter, $params[$num] ?? []);
+            $patterns = $filterOb->getPatterns();
+
+            /* Pre-processing. */
+            $text = $filterOb->preProcess($text);
+
+            /* str_replace() simple patterns. */
+            if (isset($patterns['replace'])) {
+                $text = str_replace(array_keys($patterns['replace']), array_values($patterns['replace']), $text);
+            }
+
+            /* preg_replace complex patterns. */
+            if (isset($patterns['regexp'])) {
+                $new_text = preg_replace(array_keys($patterns['regexp']), array_values($patterns['regexp']), $text);
+                if (($new_text !== null && strlen($new_text))
+                    || (preg_last_error() !== PREG_BACKTRACK_LIMIT_ERROR)) {
+                    $text = $new_text;
+                }
+            }
+
+            /* preg_replace_callback complex patterns. */
+            if (isset($patterns['regexp_callback'])) {
+                foreach ($patterns['regexp_callback'] as $key => $val) {
+                    $new_text = preg_replace_callback($key, $val, $text);
+                    if (($new_text !== null && strlen($new_text))
+                        || (preg_last_error() !== PREG_BACKTRACK_LIMIT_ERROR)) {
+                        $text = $new_text;
+                    }
+                }
+            }
+
+            /* Post-processing. */
+            $text = $filterOb->postProcess($text);
+        }
+
+        return $text;
+    }
+}

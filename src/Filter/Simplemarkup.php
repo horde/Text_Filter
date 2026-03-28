@@ -1,0 +1,64 @@
+<?php
+
+declare(strict_types=1);
+
+/**
+ * Copyright 2004-2026 Horde LLC (http://www.horde.org/)
+ *
+ * See the enclosed file LICENSE for license information (LGPL). If you
+ * did not receive this file, see http://www.horde.org/licenses/lgpl21.
+ */
+
+namespace Horde\Text\Filter\Filter;
+
+/**
+ * Highlights simple markup as used in emails or usenet postings.
+ *
+ * @author    Jan Schneider <jan@horde.org>
+ * @category  Horde
+ * @copyright 2004-2026 Horde LLC
+ * @license   http://www.horde.org/licenses/lgpl21 LGPL 2.1
+ * @package   Text_Filter
+ */
+class Simplemarkup extends Base
+{
+    /**
+     * Returns a hash with replace patterns.
+     *
+     * @return array  Patterns hash.
+     */
+    public function getPatterns(): array
+    {
+        if (!isset($this->params['html'])) {
+            $linebreak = '\n|<br(?:\s*/)?>';
+            $whitespace = '\s|&nbsp;';
+        } elseif ($this->params['html']) {
+            $linebreak = '<br(?:\s*/)?>';
+            $whitespace = '&nbsp;';
+        } else {
+            $linebreak = '\n';
+            $whitespace = '\s';
+        }
+        $startOfLine = '((?:^|' . $linebreak . ')(?:' . $whitespace . ')*)';
+        $endOfLine = '(?=(?:' . $whitespace . ')*(?:$|\.|' . $linebreak . '))';
+        $startOfWord = '(^|' . $whitespace . '|' . $linebreak . ')';
+        $endOfWord = '(?=$|\.|' . $whitespace . '|' . $linebreak . ')';
+
+        return ['regexp' => [
+            // Bold.
+            '#' . $startOfLine . '(\*(?:[^*](?!$|' . $linebreak . '))+\*)' . $endOfLine
+            . '|' . $startOfWord . '(\*[^*\s]+\*)' . $endOfWord . '#i'
+            => '$1$3<strong>$2$4</strong>',
+
+            // Underline.
+            '#' . $startOfLine . '(_(?:[^*](?!$|' . $linebreak . '))+_)' . $endOfLine
+            . '|' . $startOfWord . '(_[^_\s]+_)' . $endOfWord . '#i'
+            => '$1$3<u>$2$4</u>',
+
+            // Italic.
+            '#' . $startOfLine . '(/(?:[^*](?!$|' . $linebreak . '))+/)' . $endOfLine
+            . '|' . $startOfWord . '(/[^/\s]+/)' . $endOfWord . '#i'
+            => '$1$3<em>$2$4</em>',
+        ]];
+    }
+}
