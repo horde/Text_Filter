@@ -87,7 +87,7 @@ class Horde_Text_Filter
             /* preg_replace complex patterns. */
             if (isset($patterns['regexp'])) {
                 $new_text = preg_replace(array_keys($patterns['regexp']), array_values($patterns['regexp']), $text);
-                if (strlen($new_text) ||
+                if (($new_text !== null && strlen($new_text)) ||
                     (preg_last_error() != PREG_BACKTRACK_LIMIT_ERROR)) {
                     $text = $new_text;
                 }
@@ -97,7 +97,7 @@ class Horde_Text_Filter
             if (isset($patterns['regexp_callback'])) {
                 foreach ($patterns['regexp_callback'] as $key => $val) {
                     $new_text = preg_replace_callback($key, $val, $text);
-                    if (strlen($new_text) ||
+                    if (($new_text !== null && strlen($new_text)) ||
                         (preg_last_error() != PREG_BACKTRACK_LIMIT_ERROR)) {
                         $text = $new_text;
                     }

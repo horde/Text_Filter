@@ -12,6 +12,8 @@
  * @package  Text_Filter
  */
 
+use Horde\Util\Domhtml;
+
 /**
  * This filter attempts to make HTML safe for viewing. IT IS NOT PERFECT. If
  * you enable HTML viewing, you are opening a security hole.
@@ -26,7 +28,7 @@
  *                      the document.
  *                      DEFAULT: false (returns the contents contained inside
  *                               the BODY tag)
- *   - return_dom: (boolean) If true, return a Horde_Domhtml object instead of
+ *   - return_dom: (boolean) If true, return a Domhtml object instead of
  *                 HTML text (overrides return_document).
  *                 DEFAULT: false
  *   - strip_styles: (boolean) Strip style tags?
@@ -63,13 +65,13 @@ class Horde_Text_Filter_Xss extends Horde_Text_Filter_Base
      *
      * @param string $text  The text after the filtering.
      *
-     * @return string|Horde_Domhtml  The modified text or a Domhtml object if
+     * @return string|Domhtml  The modified text or a Domhtml object if
      *                               the 'return_dom' parameter is set.
      * @throws Exception
      */
     public function postProcess($text)
     {
-        $dom = new Horde_Domhtml($text, $this->_params['charset']);
+        $dom = new Domhtml($text, $this->_params['charset']);
 
         foreach ($dom as $node) {
             $this->_node($node);
