@@ -58,8 +58,11 @@ class Cleanascii extends Base
         $regexp = ['/[\x00-\x1f]+/' => ''];
 
         /* The '�' entry may look wrong, depending on your editor,
-         * but it's not - that's not really a single quote. */
-        $replace = [
+         * but it's not - that's not really a single quote.
+         * Note: Legacy MS Word chars may appear as � in UTF-8 causing duplicate keys. */
+        // phpcs:disable
+        /** @var array<string,string> $replace */
+        $replace = [ // @phpstan-ignore-line array.duplicateKey
             chr(150) => '-',
             chr(167) => '*',
             '��' => '*',

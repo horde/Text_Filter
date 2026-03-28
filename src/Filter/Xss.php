@@ -31,13 +31,13 @@ use Exception;
  *                      the document.
  *                      DEFAULT: false (returns the contents contained inside
  *                               the BODY tag)
- *   - return_dom: (boolean) If true, return a Domhtml object instead of
- *                 HTML text (overrides return_document).
- *                 DEFAULT: false
  *   - strip_styles: (boolean) Strip style tags?
  *                   DEFAULT: true
  *   - strip_style_attributes: (boolean) Strip style attributes in all tags?
  *                             DEFAULT: true
+ *
+ * Note: The legacy 'return_dom' parameter is not supported in the PSR-4
+ *       implementation. If you need DOM manipulation, use Horde\Util\Domhtml directly.
  *
  * @author   Jan Schneider <jan@horde.org>
  * @author   Michael Slusarz <slusarz@horde.org>
@@ -54,7 +54,6 @@ class Xss extends Base
         'charset' => 'UTF-8',
         'noprefetch' => false,
         'return_document' => false,
-        'return_dom' => false,
         'strip_styles' => true,
         'strip_style_attributes' => true,
     ];
@@ -64,11 +63,10 @@ class Xss extends Base
      *
      * @param string $text  The text after the filtering.
      *
-     * @return string|Domhtml  The modified text or a Domhtml object if
-     *                               the 'return_dom' parameter is set.
+     * @return string  The modified text (HTML string).
      * @throws Exception
      */
-    public function postProcess(string $text): string|Domhtml
+    public function postProcess(string $text): string
     {
         $dom = new Domhtml($text, $this->params['charset']);
 
@@ -83,10 +81,6 @@ class Xss extends Base
 
             $head = $dom->getHead();
             $head->appendChild($meta);
-        }
-
-        if ($this->params['return_dom']) {
-            return $dom;
         }
 
         return $this->params['return_document']

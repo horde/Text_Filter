@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Copyright 2013-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2013-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (LGPL). If you
  * did not receive this file, see http://www.horde.org/licenses/lgpl21.
@@ -11,9 +12,11 @@
  * @package    Text_Filter
  * @subpackage UnitTests
  */
+
 namespace Horde\Text\Filter;
+
 use PHPUnit\Framework\TestCase;
-use \Horde_Text_Filter;
+use Horde_Text_Filter;
 
 /**
  * Tests for the words filter.
@@ -24,6 +27,7 @@ use \Horde_Text_Filter;
  * @license    http://www.horde.org/licenses/lgpl21 LGPL 2.1
  * @package    Text_Filter
  * @subpackage UnitTests
+ * @coversNothing
  */
 class WordsTest extends TestCase
 {
@@ -31,16 +35,16 @@ class WordsTest extends TestCase
 
     public function setUp(): void
     {
-        $this->words = array('foo', 'bar');
+        $this->words = ['foo', 'bar'];
     }
 
     public function testBasicFiltering()
     {
         $line = 'foo baz bar';
 
-        $res = Horde_Text_Filter::filter($line, 'words', array(
-            'words' => $this->words
-        ));
+        $res = Horde_Text_Filter::filter($line, 'words', [
+            'words' => $this->words,
+        ]);
 
         $this->assertEquals(
             '***** baz *****',
@@ -52,10 +56,10 @@ class WordsTest extends TestCase
     {
         $line = 'foo baz';
 
-        $res = Horde_Text_Filter::filter($line, 'words', array(
+        $res = Horde_Text_Filter::filter($line, 'words', [
             'replacement' => null,
-            'words' => $this->words
-        ));
+            'words' => $this->words,
+        ]);
 
         $this->assertEquals(
             'f** baz',

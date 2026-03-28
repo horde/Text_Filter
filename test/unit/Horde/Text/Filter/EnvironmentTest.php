@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Horde_Text_Filter_Environment tests.
  *
@@ -8,12 +9,16 @@
  * @package    Text_Filter
  * @subpackage UnitTests
  */
+
 namespace Horde\Text\Filter;
 
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Horde_Text_Filter;
 
+/**
+ * @coversNothing
+ */
 class EnvironmentTest extends TestCase
 {
     public function setUp(): void
@@ -33,15 +38,15 @@ class EnvironmentTest extends TestCase
 
     public static function environmentProvider()
     {
-        return array(
-            array('Simple line', 'Simple line'),
-            array('Inline %FOO% variable', 'Inline bar variable'),
-            array('%FOO% at start', 'bar at start'),
-            array('at end %FOO%', 'at end bar'),
-            array('# %COMMENT% line', ''),
-            array('Variable %FOO% with # comment %COMMENT%', 'Variable bar with '),
-            array('Simple line', 'Simple line')
-        );
+        return [
+            ['Simple line', 'Simple line'],
+            ['Inline %FOO% variable', 'Inline bar variable'],
+            ['%FOO% at start', 'bar at start'],
+            ['at end %FOO%', 'at end bar'],
+            ['# %COMMENT% line', ''],
+            ['Variable %FOO% with # comment %COMMENT%', 'Variable bar with '],
+            ['Simple line', 'Simple line'],
+        ];
     }
 
 }

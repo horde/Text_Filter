@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Horde_Text_Filter_Space2html tests.
  *
@@ -8,12 +9,16 @@
  * @package    Text_Filter
  * @subpackage UnitTests
  */
+
 namespace Horde\Text\Filter;
 
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Horde_Text_Filter;
 
+/**
+ * @coversNothing
+ */
 class Space2htmlTest extends TestCase
 {
     #[DataProvider('space2htmlProvider')]
@@ -21,48 +26,48 @@ class Space2htmlTest extends TestCase
     {
         $this->assertEquals(
             $results,
-            Horde_Text_Filter::filter($spaces, 'space2html', array(
-                'encode_all' => false
-            ))
+            Horde_Text_Filter::filter($spaces, 'space2html', [
+                'encode_all' => false,
+            ])
         );
 
         $this->assertEquals(
             $results_encode_all,
-            Horde_Text_Filter::filter($spaces, 'space2html', array(
-                'encode_all' => true
-            ))
+            Horde_Text_Filter::filter($spaces, 'space2html', [
+                'encode_all' => true,
+            ])
         );
     }
 
     public static function space2htmlProvider()
     {
-        return array(
-            array(
+        return [
+            [
                 'x x',
                 'x x',
-                'x&nbsp;x'
-            ),
-            array(
+                'x&nbsp;x',
+            ],
+            [
                 'x  x',
                 'x&nbsp; x',
-                'x&nbsp;&nbsp;x'
-            ),
-            array(
+                'x&nbsp;&nbsp;x',
+            ],
+            [
                 'x   x',
                 'x&nbsp; &nbsp;x',
-                'x&nbsp;&nbsp;&nbsp;x'
-            ),
-            array(
+                'x&nbsp;&nbsp;&nbsp;x',
+            ],
+            [
                 'x	x',
                 'x&nbsp; &nbsp; &nbsp; &nbsp; x',
-                'x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x'
-            ),
-            array(
+                'x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x',
+            ],
+            [
                 'x		x',
                 'x&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; x',
-                'x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x'
-            )
-        );
+                'x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x',
+            ],
+        ];
     }
 
 }
