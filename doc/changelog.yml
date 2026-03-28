@@ -1,4 +1,20 @@
 ---
+3.0.0-beta1:
+  api: 3.0.0-beta1
+  state:
+    release: beta
+    api: beta
+  date: 2026-03-28
+  license:
+    identifier: LGPL-2.1-only
+    uri: https://spdx.org/licenses/LGPL-2.1-only.html
+  notes: |-
+    feat: Drop Text_Filter_Jsmin related code
+    feat: modern src/ implementation of Text_Filer
+    style: php-cs-fixer
+    feat: Use modern variants of Horde_Util classes
+    fix: Guard against null and deal with PHP version differences
+    test: Update test suite to PHPUnit 11-13 and remove outdated test patterns
 3.0.0-alpha6:
   api: 3.0.0-alpha1
   state:

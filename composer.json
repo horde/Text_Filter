@@ -21,7 +21,7 @@
             "role": "developer"
         }
     ],
-    "time": "2025-06-01",
+    "time": "2026-03-28",
     "repositories": [],
     "require": {
         "php": "^7.4 || ^8",
@@ -31,14 +31,11 @@
         "horde/secret": "^3 || dev-FRAMEWORK_6_0"
     },
     "require-dev": {
-        "horde/text_filter_jsmin": "^2 || dev-FRAMEWORK_6_0",
         "horde/text_flowed": "^3 || dev-FRAMEWORK_6_0",
         "horde/translation": "^3 || dev-FRAMEWORK_6_0",
-        "horde/test": "^3 || dev-FRAMEWORK_6_0",
         "horde/util": "^3 || dev-FRAMEWORK_6_0"
     },
     "suggest": {
-        "horde/text_filter_jsmin": "^2 || dev-FRAMEWORK_6_0",
         "horde/text_flowed": "^3 || dev-FRAMEWORK_6_0",
         "horde/translation": "^3 || dev-FRAMEWORK_6_0",
         "ext-tidy": "*"
@@ -46,11 +43,15 @@
     "autoload": {
         "psr-0": {
             "Horde_Text_Filter": "lib/"
+        },
+        "psr-4": {
+            "Horde\\Text\\Filter\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Horde\\Text\\Filter\\Test\\": "test/"
+            "Horde\\Text\\Filter\\Test\\": "test/",
+            "Horde\\Text\\Filter\\Test\\Fixtures\\": "test/fixtures/"
         }
     },
     "config": {

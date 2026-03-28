@@ -26,10 +26,10 @@ authors:
     active: false
     role: developer
 version:
-  release: 3.0.0-alpha6
+  release: 3.0.0-beta1
   api: 3.0.0alpha1
 state:
-  release: alpha
+  release: beta
   api: alpha
 license:
   identifier: LGPL-2.1-only
@@ -44,15 +44,13 @@ dependencies:
       horde/secret: ^3
   optional:
     composer:
-      horde/text_filter_jsmin: ^2
       horde/text_flowed: ^3
       horde/translation: ^3
     ext:
       tidy: '*'
   dev:
     composer:
-      horde/text_filter_jsmin: ^2
       horde/text_flowed: ^3
       horde/translation: ^3
-      horde/test: ^3
       horde/util: ^3
+vendor: horde
