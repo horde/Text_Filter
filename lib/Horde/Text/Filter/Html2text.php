@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2004-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2004-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (LGPL). If you
  * did not receive this file, see http://www.horde.org/licenses/lgpl21.
@@ -32,6 +32,9 @@
  * @license  http://www.horde.org/licenses/lgpl21 LGPL 2.1
  * @package  Text_Filter
  */
+use Horde\Util\Domhtml;
+use Horde\Util\HordeString;
+
 class Horde_Text_Filter_Html2text extends Horde_Text_Filter_Base
 {
     /**
@@ -114,12 +117,12 @@ class Horde_Text_Filter_Html2text extends Horde_Text_Filter_Base
     public function postProcess($text)
     {
         try {
-            $dom = new Horde_Domhtml($text, $this->_params['charset']);
+            $dom = new Domhtml($text, $this->_params['charset']);
             // Add two to take into account the <html> and <body> nodes.
             if (!empty($this->_params['nestingLimit'])) {
                 $this->_params['nestingLimit'] += 2;
             }
-            $text = Horde_String::convertCharset($this->_node($dom->dom, $dom->dom), 'UTF-8', $this->_params['charset']);
+            $text = HordeString::convertCharset($this->_node($dom->dom, $dom->dom), 'UTF-8', $this->_params['charset']);
         } catch (Exception $e) {
             $text = strip_tags(preg_replace("/\<br\s*\/?\>/i", "\n", $text));
         }
@@ -140,7 +143,7 @@ class Horde_Text_Filter_Html2text extends Horde_Text_Filter_Base
         /* Add link list. */
         if (!empty($this->_linkList)) {
             $text .= "\n\n" . Horde_Text_Filter_Translation::t("Links") . ":\n" .
-                str_repeat('-', Horde_String::length(Horde_Text_Filter_Translation::t("Links")) + 1) . "\n";
+                str_repeat('-', HordeString::length(Horde_Text_Filter_Translation::t("Links")) + 1) . "\n";
             foreach ($this->_linkList as $key => $val) {
                 $text .= '[' . ($key + 1) . '] ' . $val . "\n";
             }
@@ -175,7 +178,7 @@ class Horde_Text_Filter_Html2text extends Horde_Text_Filter_Base
                 }
 
                 if ($child instanceof DOMElement) {
-                    switch (Horde_String::lower($child->tagName)) {
+                    switch (HordeString::lower($child->tagName)) {
                     case 'h1':
                     case 'h2':
                     case 'h3':

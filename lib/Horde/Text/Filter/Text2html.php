@@ -3,7 +3,7 @@
  * Turn text into HTML with varying levels of parsing.  For no html
  * whatsoever, use htmlspecialchars() instead.
  *
- * Copyright 2002-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2004-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (LGPL). If you
  * did not receive this file, see http://www.horde.org/licenses/lgpl21.
@@ -15,6 +15,8 @@
  * @license  http://www.horde.org/licenses/lgpl21 LGPL 2.1
  * @package  Text_Filter
  */
+use Horde\Util\HordeString;
+
 class Horde_Text_Filter_Text2html extends Horde_Text_Filter_Base
 {
     const PASSTHRU = 0;
@@ -75,7 +77,7 @@ class Horde_Text_Filter_Text2html extends Horde_Text_Filter_Base
         parent::__construct($params);
 
         // Use ISO-8859-1 instead of US-ASCII
-        if (Horde_String::lower($this->_params['charset']) == 'us-ascii') {
+        if (HordeString::lower($this->_params['charset']) == 'us-ascii') {
             $this->_params['charset'] = 'iso-8859-1';
         }
     }
@@ -175,9 +177,9 @@ class Horde_Text_Filter_Text2html extends Horde_Text_Filter_Base
          * charset is probably incorrect. Try the popular Western charsets as
          * a last resort. */
         if (!strlen($text2)) {
-            $text2 = Horde_String::convertCharset(
+            $text2 = HordeString::convertCharset(
                 @htmlspecialchars(
-                    Horde_String::convertCharset($text, $this->_params['charset'], 'UTF-8'),
+                    HordeString::convertCharset($text, $this->_params['charset'], 'UTF-8'),
                     ENT_COMPAT,
                     'UTF-8'
                 ),
@@ -187,7 +189,7 @@ class Horde_Text_Filter_Text2html extends Horde_Text_Filter_Base
 
             if (!strlen($text2)) {
                 foreach (array('windows-1252', 'utf-8') as $val) {
-                    $text2 = Horde_String::convertCharset(
+                    $text2 = HordeString::convertCharset(
                         @htmlspecialchars($text, ENT_COMPAT, $val),
                         $val,
                         $this->_params['charset']

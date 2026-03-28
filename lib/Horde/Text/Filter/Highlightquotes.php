@@ -18,7 +18,7 @@
  *                 DEFAULT: false
  * </pre>
  *
- * Copyright 2004-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2004-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (LGPL). If you
  * did not receive this file, see http://www.horde.org/licenses/lgpl21.
@@ -29,6 +29,9 @@
  * @license  http://www.horde.org/licenses/lgpl21 LGPL 2.1
  * @package  Text_Filter
  */
+
+use Horde\Util\HordeString;
+
 class Horde_Text_Filter_Highlightquotes extends Horde_Text_Filter_Base
 {
     /**
@@ -114,7 +117,7 @@ class Horde_Text_Filter_Highlightquotes extends Horde_Text_Filter_Base
 
             if ($cb && isset($matches[1])) {
                 /* Strip all > characters. */
-                $line = substr($line, Horde_String::length($matches[1]));
+                $line = substr($line, HordeString::length($matches[1]));
             }
 
             /* Is this cite level lower than the current level? */

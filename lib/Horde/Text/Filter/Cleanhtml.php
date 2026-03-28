@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2009-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2009-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (LGPL). If you
  * did not receive this file, see http://www.horde.org/licenses/lgpl21.
@@ -10,6 +10,9 @@
  * @license  http://www.horde.org/licenses/lgpl21 LGPL 2.1
  * @package  Text_Filter
  */
+
+use Horde\Util\HordeString;
+use Horde\Util\Util;
 
 /**
  * This filter attempts to sanitize HTML by cleaning up malformed HTML tags.
@@ -49,7 +52,7 @@ class Horde_Text_Filter_Cleanhtml extends Horde_Text_Filter_Base
      */
     public function postProcess($text)
     {
-        if (!Horde_Util::extensionExists('tidy') ||
+        if (!Util::extensionExists('tidy') ||
             (($this->_params['size'] !== false) &&
              (strlen($text) > $this->_params['size']))) {
             return $text;
@@ -68,14 +71,14 @@ class Horde_Text_Filter_Cleanhtml extends Horde_Text_Filter_Base
 
         $tidy = new tidy();
 
-        if (Horde_String::lower($this->_params['charset']) == 'us-ascii') {
+        if (HordeString::lower($this->_params['charset']) == 'us-ascii') {
             if ($tidy->parseString($text, $tidy_config, 'ascii')) {
                 $tidy->cleanRepair();
                 $text = $tidy->value;
             }
-        } elseif ($tidy->parseString(Horde_String::convertCharset($text, $this->_params['charset'], 'UTF-8'), $tidy_config, 'utf8')) {
+        } elseif ($tidy->parseString(HordeString::convertCharset($text, $this->_params['charset'], 'UTF-8'), $tidy_config, 'utf8')) {
             $tidy->cleanRepair();
-            $text = Horde_String::convertCharset($tidy->value, 'UTF-8', $this->_params['charset']);
+            $text = HordeString::convertCharset($tidy->value, 'UTF-8', $this->_params['charset']);
         }
 
         return $text;

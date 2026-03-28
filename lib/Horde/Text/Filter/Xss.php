@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2004-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2004-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (LGPL). If you
  * did not receive this file, see http://www.horde.org/licenses/lgpl21.
@@ -13,6 +13,7 @@
  */
 
 use Horde\Util\Domhtml;
+use Horde\Util\HordeString;
 
 /**
  * This filter attempts to make HTML safe for viewing. IT IS NOT PERFECT. If
@@ -109,12 +110,12 @@ class Horde_Text_Filter_Xss extends Horde_Text_Filter_Base
                 ? array('style')
                 : array();
 
-            switch (Horde_String::lower($node->tagName)) {
+            switch (HordeString::lower($node->tagName)) {
             case 'a':
             case 'form':
                 /* Strip out data URLs living in link-like elements
                  * (Bug #8715). */
-                if (Horde_String::lower($node->tagName) == 'form') {
+                if (HordeString::lower($node->tagName) == 'form') {
                     $attributes = array('action');
                 } else {
                     $attributes = array('href', 'xlink:href');

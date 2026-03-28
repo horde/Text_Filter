@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 1999-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 1999-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (LGPL). If you
  * did not receive this file, see http://www.horde.org/licenses/lgpl21.
@@ -11,6 +11,8 @@
  * @license  http://www.horde.org/licenses/lgpl21 LGPL 2.1
  * @package  Text_Filter
  */
+
+use Horde\Util\HordeString;
 
 /**
  * Horde_Text_Filter is a parent class for defining stackable text filters.
@@ -39,7 +41,7 @@ class Horde_Text_Filter
     public static function factory($driver, $params = array())
     {
         /* Base drivers (in Filter/ directory). */
-        $class = __CLASS__ . '_' . Horde_String::ucfirst(basename($driver));
+        $class = __CLASS__ . '_' . HordeString::ucfirst(basename($driver));
         if (class_exists($class)) {
             return new $class($params);
         }

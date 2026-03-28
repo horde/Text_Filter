@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2016-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2004-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (LGPL). If you
  * did not receive this file, see http://www.horde.org/licenses/lgpl21.
@@ -19,6 +19,8 @@
  * @license  http://www.horde.org/licenses/lgpl21 LGPL 2.1
  * @package  Text_Filter
  */
+use Horde\Util\HordeString;
+
 class Horde_Text_Filter_Msoffice extends Horde_Text_Filter_Base
 {
     /**
@@ -53,10 +55,10 @@ class Horde_Text_Filter_Msoffice extends Horde_Text_Filter_Base
         // unless they contain other classes. Then replace with <div> elements.
         foreach ($dom as $child) {
             if ($child instanceof DOMElement &&
-                Horde_String::lower($child->tagName) == 'p') {
+                HordeString::lower($child->tagName) == 'p') {
             }
             if (!($child instanceof DOMElement) ||
-                Horde_String::lower($child->tagName) != 'p' ||
+                HordeString::lower($child->tagName) != 'p' ||
                 !($css = $child->getAttribute('class')) ||
                 strpos($css, 'MsoNormal') === false) {
                 continue;
