@@ -12,6 +12,9 @@
  * @package  Text_Filter
  */
 
+use Horde\Util\Domhtml;
+use Horde\Util\HordeString;
+
 /**
  * Takes HTML and removes any MS Office formatting quirks.
  *
@@ -20,7 +23,6 @@
  * @license  http://www.horde.org/licenses/lgpl21 LGPL 2.1
  * @package  Text_Filter
  */
-use Horde\Util\HordeString;
 
 class Horde_Text_Filter_Msoffice extends Horde_Text_Filter_Base
 {
@@ -47,7 +49,7 @@ class Horde_Text_Filter_Msoffice extends Horde_Text_Filter_Base
         $text = str_replace('<o:p>&nbsp;</o:p>', '', $text);
 
         try {
-            $dom = new Horde_Domhtml($text, $this->_params['charset']);
+            $dom = new Domhtml($text, $this->_params['charset']);
         } catch (Exception $e) {
             return $text;
         }
