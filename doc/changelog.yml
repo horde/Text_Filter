@@ -97,6 +97,17 @@
   notes: |-
     Original version string was 3.0.0alpha1
     |
+3.0.0-RC1:
+  api: 3.0.0-RC1
+  state:
+    release: RC
+    api: RC
+  date: 2026-05-12
+  license:
+    identifier: LGPL-2.1-only
+    uri: https://spdx.org/licenses/LGPL-2.1-only.html
+  notes: |-
+    fix: Fall back to original text if dimsignature filter hits a regex limit
 2.3.8:
   api: 2.3.0
   state:
