@@ -32,6 +32,9 @@ class Dimsignature extends Base
     public function postProcess(string $text): string
     {
         $parts = preg_split('/(\n--\s*(?:<br \/>)?\r?\n.*?)(?=<\/?(?:div|span)|$\s)/is', $text, -1, PREG_SPLIT_DELIM_CAPTURE);
+        if ($parts === false) {
+            return $text;
+        }
         $text = '';
 
         while (count($parts)) {

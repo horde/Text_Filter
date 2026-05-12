@@ -29,6 +29,9 @@ class Horde_Text_Filter_Dimsignature extends Horde_Text_Filter_Base
             $text = '';
         }
         $parts = preg_split('/(\n--\s*(?:<br \/>)?\r?\n.*?)(?=<\/?(?:div|span)|$\s)/is', $text, -1, PREG_SPLIT_DELIM_CAPTURE);
+        if ($parts === false) {
+            return $text;
+        }
         $text = '';
 
         while (count($parts)) {
